@@ -1,0 +1,36 @@
+{
+  "name": "folx",
+  "version": "1.0.0",
+  "description": "olx remastered",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-w": "nodemon ./backend/index.js",
+    "start": "node ./backend/index.js",
+    "build": "webpack"
+  },
+  "author": "sideroff",
+  "homepage": "https://github.com/sideroff/folx#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sideroff/folx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sideroff/folx/issues"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "nodemon": "^1.17.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10"
+  }
+}
