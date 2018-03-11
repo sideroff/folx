@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const config = require("./config")
 
 let watch = config.mode === "development"
+let devtool = config.mode === "development" ? "#eval-source-map" : undefined
 
 // f me
 // https://gist.github.com/gricard/e8057f7de1029f9036a990af95c62ba8
@@ -16,6 +17,7 @@ module.exports = {
   entry: {
     app: "./frontend/index.js"
   },
+  devtool: devtool,
   module: {
     rules: [
       {
