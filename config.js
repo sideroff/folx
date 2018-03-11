@@ -19,9 +19,20 @@ module.exports = {
     }
   },
   database: {
-
+    connectionString: "",
+    name: "",
+    port: "",
+    username: "",
+    password: ""
   },
   cache: {
-
+    connectionParams: {
+      host: "pub-redis-10370.eu-central-1-1.1.ec2.redislabs.com",
+      port: 10370,
+      password: "oT3GPG92CmeBFmL9DnUtwKxishZBNq28"
+    },
+    prefixes: {
+      token: "t:"
+    }
   }
 }

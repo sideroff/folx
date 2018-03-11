@@ -6,6 +6,7 @@ const exceptions = require("./exceptions")
 const config = require("./../config")
 const logger = require("./logger")
 const utils = require("./utils")
+const cache = require("./connectors/cache")
 
 const serviceProviders = require("./serviceProviders")
 
@@ -150,7 +151,7 @@ function initialize() {
 let promises = []
 
 //promises.push(db.initialize())
-//promises.push(cache.initialize())
+promises.push(cache.initialize())
 promises.push(initialize())
 
 Promise.all(promises).then(results => {
@@ -158,4 +159,3 @@ Promise.all(promises).then(results => {
 }).catch(error => {
   logger.log(`Application ${process.pid} has encountered an error ${JSON.stringify(error)}`)
 })
-
