@@ -41,6 +41,30 @@ function handlePostRequest(req, res) {
   })
 }
 
+function handleGetRequest(req, res) {
+  return handleFileRequest(req, res).then(result => {
+    res.writeHead(200, { "Content-Type": result.mime || "text/plain" })
+
+    result.buffer.on("end", () => {
+      res.end()
+    })
+
+    result.buffer.pipe(res)
+  }).catch(error => {
+    res.writeHead(error.httpCode || 200)
+
+    if (utils.isNotStandartError(error)) {
+      error = exceptions.friendlyError
+    }
+
+    error = utils.toStandartError(error)
+    let response = utils.stringifyServiceResponse(error)
+
+    res.write(response)
+    res.end()
+  })
+}
+
 
 function handleFileRequest(req, res) {
   return new Promise((resolve, reject) => {
@@ -79,31 +103,12 @@ function requestListener(req, res) {
   let handler
 
   if (req.method === "GET") {
-    return handleFileRequest(req, res).then(result => {
-      res.writeHead(200, { "Content-Type": result.mime || "text/plain" })
-
-      result.buffer.on("end", () => {
-        res.end()
-      })
-
-      result.buffer.pipe(res)
-    }).catch(error => {
-      res.writeHead(error.httpCode || 200)
-
-      if (utils.isNotStandartError(error)) {
-        error = exceptions.friendlyError
-      }
-
-      error = utils.toStandartError(error)
-      let response = utils.stringifyServiceResponse(error)
-
-      res.write(response)
-      res.end()
-    })
-  } else if (req.method === "POST" && req.url.startsWith("/api")) {
+    return handleGetRequest(req, res)
+  }
+  else if (req.method === "POST" && req.url.startsWith("/api")) {
     handler = handlePostRequest
   } else {
-    handler = Promise.reject(exceptions.badRequest)
+    handler = (req, res) => Promise.reject(exceptions.badRequest)
   }
 
   handler(req, res).then(data => {
@@ -119,7 +124,7 @@ function requestListener(req, res) {
 
     res.writeHead(error.httpCode || 200)
 
-    if (utils.isNotStandartError) {
+    if (utils.isNotStandartError(error)) {
       logger.log(`Request handler responded with unhandled error. ${JSON.stringify(error)}`)
       error = exceptions.friendlyError
     }

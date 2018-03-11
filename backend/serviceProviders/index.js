@@ -12,7 +12,7 @@ module.exports = {
         return reject(exceptions.invalidServiceRequest)
       }
 
-      let handler = providers[serviceRequest.provider][serviceRequest.method]
+      let handler = providers[serviceRequest.provider][serviceRequest.service]
 
       handler(serviceRequest.params, res).then(result => {
         resolve(result)
