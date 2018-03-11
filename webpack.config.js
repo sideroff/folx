@@ -1,6 +1,6 @@
 const path = require("path")
 const webpack = require("webpack")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 const config = require("./config")
 
@@ -29,17 +29,10 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        }, {
-          loader: "css-loader", options: {
-            sourceMap: true
-          }
-        }, {
-          loader: "sass-loader", options: {
-            sourceMap: true
-          }
-        }]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
       }
     ]
   },
@@ -54,10 +47,7 @@ module.exports = {
     }
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
+    new ExtractTextPlugin("styles.css")
   ],
   output: {
     path: path.join(config.webServer.publicFolderPath, "/compile/"),

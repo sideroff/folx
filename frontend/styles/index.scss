@@ -1,4 +1,15 @@
-@import "test";
-body {
-  background: black;
+$header-background-height: 104px;
+$header-foreground-height: 98px;
+$header-background-color: #21B573;
+$header-foreground-color: #fdfdf9;
+
+header {
+  background-color: $header-background-color;
+  height: $header-background-height;
+}
+
+.header-foreground {
+  background-color: $header-foreground-color;
+  height: $header-foreground-height;
+  width:10%;
 }
