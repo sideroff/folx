@@ -1,7 +1,11 @@
 # folx
 A craigslist wannabe.
 
-### Check it out [here]()
+- Keep in mind that this is a work in progress and stuff will change
+
+### Check out the designs [here](https://www.figma.com/file/OxiD0OdI6U4vTVvz18Xu7lHj/folx)
+
+### Check it out [~~here~~](# "The app is not yet hosted.")
 
 ### To run locally
 1. Make sure you have the latest [node & npm](https://nodejs.org/en/) installed.
