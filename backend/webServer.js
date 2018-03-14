@@ -7,6 +7,7 @@ const config = require("./../config")
 const logger = require("./logger")
 const utils = require("./utils")
 const cache = require("./connectors/cache")
+const db = require("./connectors/database")
 
 const serviceProviders = require("./serviceProviders")
 
@@ -155,7 +156,7 @@ function initialize() {
 
 let promises = []
 
-//promises.push(db.initialize())
+promises.push(db.initialize())
 promises.push(cache.initialize())
 promises.push(initialize())
 
@@ -163,4 +164,6 @@ Promise.all(promises).then(results => {
   logger.log(`Application ${process.pid} has been initialized successfully`)
 }).catch(error => {
   logger.log(`Application ${process.pid} has encountered an error ${JSON.stringify(error)}`)
+  // TODO: kill all connections
+  process.kill(process.pid, 0)
 })

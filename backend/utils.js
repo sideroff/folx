@@ -1,4 +1,5 @@
 const path = require("path")
+const crypto = require("crypto")
 
 const exceptions = require("./exceptions")
 const logger = require("./logger")
@@ -39,5 +40,16 @@ module.exports = {
   },
   isNotStandartError: error => {
     return !error || typeof error !== "object" || !exceptions[error.code]
+  },
+  generateRandomString: (length) => {
+    return crypto.randomBytes(Math.ceil(length / 2))
+      .toString("hex")
+      .slice(0, length)
+  },
+  sha256: (str, salt) => {
+    let hash = crypto.createHmac("sha256", salt)
+    hash.update(str)
+
+    return hash.digest("hex")
   }
 }

@@ -4,7 +4,7 @@ const os = require("os")
 const logger = require("./logger")
 
 if (cluster.isMaster) {
-  
+
   let cpuCount = os.cpus().length
   for (let i = 0; i < cpuCount; i++) {
     let worker = cluster.fork()
@@ -18,7 +18,7 @@ if (cluster.isMaster) {
     })
 
     worker.on("exit", (worker, code, signal) => {
-      if (worker.exitedAfterDisconnect) {
+      if (worker.exitedAfterDisconnect && code != 0) {
         return logger.log(`Worker ${worker.process.pid} has exited voluntarily with a code ${code} & signal ${signal}`)
       }
 

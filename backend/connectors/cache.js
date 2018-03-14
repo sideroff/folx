@@ -19,6 +19,10 @@ class Cache {
       })
     })
   }
+
+  closeConnection() {
+    this.client.quit()
+  }
 }
 
 let instance
