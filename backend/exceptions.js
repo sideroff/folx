@@ -18,5 +18,9 @@ module.exports = {
   invalidFile: {
     code: "invalidFile",
     message: "Invalid or missing file requested."
+  },
+  databaseException: {
+    code: "databaseException",
+    message: "There was a problem with the database."
   }
 }
