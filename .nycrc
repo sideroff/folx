@@ -1,0 +1,27 @@
+{
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 99,
+    "statements": 99,
+    "functions": 99,
+    "branches": 99,
+    "include": [
+      "backend/serviceProviders/*.js"
+    ],
+    "exclude": [
+      "src/**/*.spec.js"
+    ],
+    "ignore-class-method": "methodToIgnore",
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "require": [
+    ],
+    "extension": [
+      ".jsx"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "./alternative"
+  }

@@ -20,8 +20,12 @@ class Cache {
     })
   }
 
-  closeConnection() {
+  close() {
     this.client.quit()
+    
+    logger.log(`Connection to redis has been closed voluntarily.`)
+
+    return Promise.resolve()
   }
 }
 

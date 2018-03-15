@@ -27,13 +27,30 @@ module.exports = {
 
   initialize: () => {
     return new Promise((resolve, reject) => {
-      mongoose.connect(config.database.connectionString).then(connection => {
+      let options = {
+        poolSize: 20,
+        socketTimeoutMS: 480000,
+        keepAlive: 300000
+      }
+      mongoose.connect(config.database.connectionString, options).then(connection => {
         initializeModels()
         logger.log("Connection to database & model initialization is successful")
         resolve(connection)
       }).catch(error => {
         logger.log(`Connection to database could not be established ${JSON.stringify(error)}`)
         reject(error)
+      })
+    })
+
+  },
+
+  close: () => {
+    return new Promise((resolve, reject) => {
+      logger.log(`Connection to database is getting closed voluntarily.`)
+
+      mongoose.disconnect(function () {
+        logger.log(`Connection to database has been closed voluntarily.`)
+        resolve()
       })
     })
 
