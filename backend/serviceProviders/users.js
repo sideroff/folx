@@ -12,12 +12,13 @@ module.exports = {
     return new Promise((resolve, reject) => {
       //param checks
       if (!(params.username && typeof params.username === "string"
-        && params.password && typeof params.password === "string")) {
-        return reject(exceptions.invalidParams)
+        && params.password && typeof params.password === "string"
+        && params.password === params.confirmPassword)) {
+        return reject(exceptions.invalidServiceRequestParams)
       }
 
-      let salt = utils.generateRandomString(config.webServer.passwordSaltLength)
-      let passwordHash = utils.sha256(params.password, salt)
+      params.salt = utils.generateRandomString(config.webServer.passwordSaltLength)
+      params.passwordHash = utils.sha256(params.password, params.salt)
 
       new db.models.User(params).save().then(result => {
         resolve("Registration was successful")
