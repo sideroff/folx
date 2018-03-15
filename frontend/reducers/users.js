@@ -1,6 +1,7 @@
 import actionTypes from './../actionTypes'
 
 const defaultState = {
+  current: null,
   isLoggingIn: false
 }
 

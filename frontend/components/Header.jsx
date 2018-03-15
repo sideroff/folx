@@ -8,20 +8,21 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <div>
-        <header>
-          <div className='header-foreground'>
-            <Link to="/">
-              <img className='logo' src='/logo.png' alt='logo' />
-              <img className='mobile-logo' src='/mobile-logo.png' alt='logo' />
-            </Link>
-          </div>
-          <h1>header</h1>
-          <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque amet ab a laudantium praesentium.
-          Sint excepturi velit doloribus impedit in.</div>
-        </header>
+      <header>
+        <div>
+          <Link to='/'>
+            <img src="/logo.png" alt="logo" />
+            <img src="mobile-logo.png" alt="mobile.logo" />
+          </Link>
+        </div>
+        <div>
+          <Link to='/profile'>Profile</Link>
+          <Link to='/ad-create'>New Ad</Link>
+          <Link to='/ads'>Posts</Link>
+          <Link to='/about'>About</Link>
+        </div>
 
-      </div>
+      </header>
     )
   }
 }
