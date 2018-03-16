@@ -49,3 +49,11 @@ header {
   color: $dark-background-font-color-transparent;
   height: $header-height;
 }
+
+.card-grid {
+  display: grid;
+  .card{
+    width: 50px;
+    height: 50px;
+  }
+}
