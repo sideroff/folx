@@ -26,3 +26,21 @@ Promise.all(promises)
   }).catch(error => {
     console.log(`error ${JSON.stringify(error)}`)
   })
+
+// function isPalindrome(str) {
+//   return str.toLowerCase().replace(/\W/g, '').split('').reverse().join('') === str.toLowerCase().replace(/\W/g, '')
+// }
+
+// let str = "A Santa dog lived as a devil God at NASA."
+// console.log(isPalindrome(str))
+
+
+// function sum(a, b) {
+//   if (b) {
+//     return sum
+//   }
+//   return arguments.reduce((a, c) => {a+c}, 0)
+// }
+
+// console.log(sum(2, 3))
+// console.log(sum(2)(3))

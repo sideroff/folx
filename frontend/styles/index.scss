@@ -7,10 +7,11 @@ $secondary-color-light: #ff6090;
 $secondary-color-dark: #b0003a;
 
 $light-background-font-color: #000000;
-$dark-background-font-color-transparent: rgba(255,255,255,0.87);
+$dark-background-font-color-transparent: rgba(255, 255, 255, 0.87);
 $dark-background-font-color: #FFFFFF;
 
 $header-height: 104px;
+$primary-border-radius: 5px;
 
 body {
   font-family: 'Roboto, Arial, Helvetica';
@@ -33,7 +34,7 @@ header {
     justify-self: center;
 
     a {
-      color: inherit; 
+      color: inherit;
       text-decoration: none;
       padding: 0.5em;
       margin: 0.5em;
@@ -52,8 +53,20 @@ header {
 
 .card-grid {
   display: grid;
-  .card{
-    width: 50px;
-    height: 50px;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 1em;
+
+  .card {
+    border-radius: $primary-border-radius;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.52);
+    -moz-box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.52);
+    box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.52);
+    img {
+      width: 100%;
+    }
   }
 }
