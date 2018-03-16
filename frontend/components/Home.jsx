@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-import Card from './Card.jsx'
+import Cards from './Cards.jsx'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -12,9 +12,7 @@ export default class Home extends React.Component {
     return (
       <div>
         <h2>Home</h2>
-        <div className="card-grid">
-          {this.props.ads.map(a => <Card />)}
-        </div>
+        <Cards ads={[1, 2, 3, 4, 5]} />
       </div>
     )
   }
