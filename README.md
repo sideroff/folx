@@ -3,7 +3,7 @@ A craigslist wannabe.
 
 - Keep in mind that this is a work in progress and stuff will change
 
-### Check out the designs [here](https://www.figma.com/file/OxiD0OdI6U4vTVvz18Xu7lHj/folx)
+### Check out the designs [here](https://www.figma.com/file/OxiD0OdI6U4vTVvz18Xu7lHj/folx) & [here](https://material.io/color/#!/?view.left=1&view.right=0&primary.color=00AA8D&secondary.color=E91E63)
 
 ### Check it out [~~here~~](# "The app is not yet hosted.")
 
