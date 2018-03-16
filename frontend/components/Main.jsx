@@ -18,7 +18,7 @@ export default class Main extends React.Component {
     return (
       <div className='main-content'>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/profile" component={requireAuth(Profile)} />
           <Route exact path="/ad-create" component={requireAuth(AdCreate)} />
           <Route exact path="/login" component={Authentication} />

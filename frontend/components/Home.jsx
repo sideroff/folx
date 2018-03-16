@@ -9,8 +9,8 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <h2> 404 not found</h2>
-        <p>But look on the birght side... Now you can check out the latest ads below :).</p>
+        <h2> Home</h2>
+        <p>This is the homepage</p>
       </div>
     )
   }
