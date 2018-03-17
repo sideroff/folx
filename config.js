@@ -1,7 +1,7 @@
 const path = require("path")
 
 module.exports = {
-  mode: process.env.NODE_MODE || "development",
+  mode: process.env.MODE || "development",
   webServer: {
     port: process.env.PORT || 9000,
     publicFolderPath: path.join(__dirname, "/src/"),
