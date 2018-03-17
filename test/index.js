@@ -1,4 +1,4 @@
-https://github.com/istanbuljs/nyc
+// https://github.com/istanbuljs/nyc
 
 var assert = require('assert')
 
