@@ -1,6 +1,6 @@
 class Logger {
-  log(message) {
-    console.log(message)
+  log() {
+    console.log.apply(console, [...arguments, process.pid])
   }
 }
 
