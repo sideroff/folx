@@ -61,7 +61,7 @@ header {
   justify-content: space-around;
   justify-items: center;
   align-items: center;
-  grid-gap: 1em;
+  grid-gap: 1em 1.5em;
 
   .card {
     border-radius: $primary-border-radius;
@@ -103,3 +103,10 @@ header {
     }
   }
 }
+
+
+
+// import media queries are defined after all styles they wish to override so they take precedence
+// read more on https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+@import "media768";
+@import "media600";
