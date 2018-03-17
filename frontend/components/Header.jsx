@@ -18,7 +18,7 @@ export default class Header extends React.Component {
             </Link>
           </div>
           <nav className="header-nav">
-            <Link to='/profile'>Profile</Link>
+            <Link to='/profile'><strong>Profile</strong></Link>
             <Link to='/ad-create'>New Ad</Link>
             <Link to='/ads'>Posts</Link>
             <Link to='/about'>About</Link>
