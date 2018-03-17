@@ -36,8 +36,6 @@ module.exports = {
     let parentTokens = parent.split(path.sep).filter(i => i.length)
     let childTokens = child.split(path.sep).filter(i => i.length)
 
-    logger.log(`parent ${JSON.stringify(parentTokens)} \n childTokens ${JSON.stringify(childTokens)}`)
-
     return parentTokens.every((t, i) => childTokens[i] === t)
   },
   isNotStandartError: error => {

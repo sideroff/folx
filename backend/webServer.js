@@ -81,7 +81,6 @@ function handleFileRequest(req, res) {
     let mime = config.webServer.publiclyAccessibleFileExtToMime[ext]
     logger.log(filename, ext, mime)
     if (!mime) {
-      logger.log('mime is wrong')
       return reject(exceptions.invalidFile)
     }
 
@@ -90,14 +89,12 @@ function handleFileRequest(req, res) {
     logger.log(filePath, config.webServer.publicFolderPath)
 
     if (!utils.isSubdirectoryOf(filePath, config.webServer.publicFolderPath)) {
-      logger.log('subdirectory is wrong')
       return reject(exceptions.invalidFile)
     }
 
     fs.stat(filePath, (error, stats) => {
       logger.log(`error ${JSON.stringify(error)}`)
       if (error) {
-        logger.log('stat has error')
         return reject(exceptions.invalidFile)
       }
 
@@ -172,6 +169,8 @@ Promise.all(promises).then(results => {
   logger.log(`Application ${process.pid} has been initialized successfully`)
 }).catch(error => {
   logger.log(`Application ${process.pid} has encountered an error ${JSON.stringify(error)}`)
+
   // TODO: kill all connections
+  
   process.kill(process.pid, 0)
 })

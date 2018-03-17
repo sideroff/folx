@@ -5,7 +5,6 @@ import Card from './Card.jsx'
 export default class Cards extends React.Component {
   constructor(props) {
     super(props)
-    console.log(`cards - ${JSON.stringify(this.props)}`)
   }
 
   render() {
