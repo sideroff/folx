@@ -27,6 +27,10 @@ header {
     padding: 0.5rem;
     display: table-cell;
     white-space: nowrap;
+
+    .mobile {
+      display: none;
+    }
   }
 
   .header-nav {

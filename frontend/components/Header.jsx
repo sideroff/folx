@@ -14,8 +14,8 @@ export default class Header extends React.Component {
           <div className="header-mobile-hamburger"><span>☰</span></div>
           <div className="header-logo">
             <Link to='/'>
-              <img src="/logo.png" alt="logo" />
-              <img src="mobile-logo.png" alt="mobile.logo" />
+              <img className="full-size" src="/logo.png" alt="logo" />
+              <img className="mobile" src="mobile-logo.png" alt="mobile.logo" />
             </Link>
           </div>
           <nav className="header-nav">

@@ -16,13 +16,21 @@
       cursor: pointer;
     }
 
-    .header-mobile-hamburger:hover {
+    .header-mobile-hamburger:hover,
+    .header-main.active .header-mobile-hamburger {
       background-color: $primary-color-dark;
     }
 
     .header-logo {
       display: block;
       text-align: center;
+
+      .full-size {
+        display: none;
+      }
+      .mobile {
+        display: inline;
+      }
     }
 
     .header-nav {
@@ -32,11 +40,22 @@
       position: absolute;
       z-index: 2;
       top: $header-height;
+      transform: translateX(-100%);
+      transition: all 0.5s;
+
+      box-shadow: $primary-shadow-right;
+      -moz-box-shadow: $primary-shadow-right;
+      -webkit-box-shadow: $primary-shadow-right;
+      -o-box-shadow: $primary-shadow-right;
 
       a {
         display: block;
         text-align: left;
       }
+    }
+
+    .header-main.active .header-nav {
+      transform: translateX(0);
     }
 
     .header-overlay {
@@ -46,6 +65,11 @@
       width: 100%;
       background-color: rgba(0, 0, 0, 0.4);
       z-index: 1;
+      display: none;
+    }
+
+    .header-main.active .header-overlay {
+      display: block;
     }
   }
 }
