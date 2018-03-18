@@ -2,4 +2,50 @@
   .card-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  header {
+
+    .header-mobile-hamburger {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      padding: 0 0.8em;
+      height: $header-height - $header-top-bar-height;
+      font-size: x-large;
+      transition: all 0.5s;
+      cursor: pointer;
+    }
+
+    .header-mobile-hamburger:hover {
+      background-color: $primary-color-dark;
+    }
+
+    .header-logo {
+      display: block;
+      text-align: center;
+    }
+
+    .header-nav {
+      width: 40%;
+      height: 100%;
+      background: $primary-color-dark;
+      position: absolute;
+      z-index: 2;
+      top: $header-height;
+
+      a {
+        display: block;
+        text-align: left;
+      }
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: $header-height;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+  }
 }

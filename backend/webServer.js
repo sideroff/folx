@@ -171,6 +171,6 @@ Promise.all(promises).then(results => {
   logger.log(`Application ${process.pid} has encountered an error ${JSON.stringify(error)}`)
 
   // TODO: kill all connections
-  
+
   process.kill(process.pid, 0)
 })
