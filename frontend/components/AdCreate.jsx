@@ -75,7 +75,7 @@ export default class AdCreate extends React.Component {
   render() {
     return (
       <div>
-        Ad Create form
+        Ad Create form ay
       </div>
     )
   }
