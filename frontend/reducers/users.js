@@ -11,6 +11,5 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, { isLoggingIn: true })
     default:
       return state
-
   }
 }
