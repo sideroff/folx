@@ -79,21 +79,18 @@ function handleFileRequest(req, res) {
     }
 
     let mime = config.webServer.publiclyAccessibleFileExtToMime[ext]
-    logger.log(filename, ext, mime)
     if (!mime) {
       return reject(exceptions.invalidFile)
     }
 
     let filePath = path.normalize(config.webServer.publicFolderPath + filename)
 
-    logger.log(filePath, config.webServer.publicFolderPath)
 
     if (!utils.isSubdirectoryOf(filePath, config.webServer.publicFolderPath)) {
       return reject(exceptions.invalidFile)
     }
 
     fs.stat(filePath, (error, stats) => {
-      logger.log(`error ${JSON.stringify(error)}`)
       if (error) {
         return reject(exceptions.invalidFile)
       }
