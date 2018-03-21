@@ -20,7 +20,6 @@ function handlePostRequest(req, res) {
     })
 
     req.on("end", () => {
-
       try {
         body = JSON.parse(body)
       } catch (error) {
