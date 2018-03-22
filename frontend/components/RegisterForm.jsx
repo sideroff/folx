@@ -16,7 +16,7 @@ export default class RegisterForm extends React.Component {
 
   onChange(event) {
     event.preventDefault()
-    console.log('register submit')
+    console.log('register change')
   }
 
   render() {
