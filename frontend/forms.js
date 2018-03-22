@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   login: {
     name: 'login',
     customClasses: ' authentication',

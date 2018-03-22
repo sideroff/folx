@@ -120,15 +120,20 @@ input:focus {
   outline: none;
 }
 
-.form-wrapper.centered {
+.form-wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr;
+  height: 100%;
+
   input {
     padding: 0.5em;
     margin: 0.5em;
   }
 }
-
+.authentication-side-picture {
+  align-self: center;
+  justify-self: center;
+}
 
 
 
