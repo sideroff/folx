@@ -107,14 +107,13 @@ header {
 }
 
 input {
-  ;
   border: none;
   border-bottom: 1px solid $primary-color-unselected;
 }
 
 input:focus {
   outline: none;
-  border-bottom: 1px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
 }
 
 *:focus {
@@ -125,8 +124,8 @@ input:focus {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   input {
-    display: block;
-    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em;
   }
 }
 

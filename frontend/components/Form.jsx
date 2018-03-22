@@ -10,13 +10,15 @@ export default class Form extends React.Component {
       <div>
         <form action='#' onSubmit={this.props.onSubmit} className={'form ' + (this.props.config.customClasses || '')}>
           {this.props.config.fields.map((f, i) =>
-            <input
-              onChange={this.props.onChange}
-              type={f.type || 'text'}
-              name={f.name}
-              placeholder={f.placeholder}
-              key={i}
-              className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />)}
+            <div>
+              <input
+                onChange={this.props.onChange}
+                type={f.type || 'text'}
+                name={f.name}
+                placeholder={f.placeholder}
+                key={i}
+                className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />
+            </div>)}
         </form>
       </div>
     )
