@@ -1,7 +1,6 @@
 module.exports = {
   login: {
     name: 'login',
-    customClasses: ' authentication',
     fields: [
       {
         name: 'username',
@@ -17,7 +16,6 @@ module.exports = {
   },
   register: {
     name: 'register',
-    customClasses: ' authentication',
     fields: [
       {
         name: 'username',
