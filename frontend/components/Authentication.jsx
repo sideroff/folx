@@ -16,7 +16,7 @@ class Authentication extends React.Component {
   render() {
     return (
       <div>
-        <div className="form-wrapper">
+        <div className="authentication">
           <div className="authentication-side-picture"><img src="https://picsum.photos/300/300/?random" alt="" /></div>
           <Route exact path="/register" component={RegisterForm} />
           <Route exact path="/login" component={LoginForm} />

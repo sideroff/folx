@@ -7,7 +7,7 @@ export default class Form extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
         <form action='#' onSubmit={this.props.onSubmit} className={'form ' + (this.props.config.customClasses || '')}>
           {this.props.config.fields.map((f, i) =>
             <div key={i}>

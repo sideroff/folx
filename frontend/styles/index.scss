@@ -120,7 +120,7 @@ input:focus {
   outline: none;
 }
 
-.form-wrapper {
+.authentication {
   display: grid;
   grid-template-columns: 2fr 1fr;
   height: 100%;
@@ -130,6 +130,7 @@ input:focus {
     margin: 0.5em;
   }
 }
+
 .authentication-side-picture {
   align-self: center;
   justify-self: center;
