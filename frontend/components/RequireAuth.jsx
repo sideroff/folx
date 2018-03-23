@@ -20,7 +20,7 @@ export default function (Component) {
 
     render() {
       return (
-        this.props.currentUser
+        this.props.currentUser.isLoggedIn
           ? <Component {...this.props} />
           : <Redirect to='/login' />
       )
