@@ -4,12 +4,11 @@ import { Redirect } from 'react-router-dom'
 
 function mapStateToProps(state) {
   return {
-    currentUser: state.users.current
+    currentUser: state.currentUser
   }
 }
-
+// TODO: this setup wont allow parent component to pass properties to child component
 export default function (Component) {
-
   class Authenticate extends React.Component {
     constructor(props) {
       super(props)

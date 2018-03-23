@@ -2,4 +2,12 @@
   .card-grid {
     grid-template-columns: 1fr;
   }
+
+  .authentication {
+    grid-template-columns: 1fr;
+
+    .authentication-side-picture {
+      display: none;
+    }
+  }
 }

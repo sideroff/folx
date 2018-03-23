@@ -1,13 +1,29 @@
 import React from 'react'
 
-export default class Profile extends React.Component {
+import { connect } from 'react-redux'
+
+function mapStateToProps(state) {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+class Profile extends React.Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <h1>profile</h1>
+      <div>
+        <h1>Profile</h1>
+        <div>
+          <div><span>Username: {this.props.currentUser.username}</span></div>
+          <div><span>Email: {this.props.currentUser.email}</span></div>
+        </div>
+      </div>
     )
   }
 }
+
+export default connect(mapStateToProps)(Profile)
