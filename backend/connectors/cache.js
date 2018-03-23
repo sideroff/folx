@@ -19,10 +19,39 @@ class Cache {
       })
     })
   }
+  setSession(token, data) {
+    return new Promise((resolve, reject) => {
+      if (typeof data !== "string") {
+        try {
+          data = JSON.stringify(data)
+        } catch (error) {
+          data = data.toString()
+        }
+      }
+
+      this.client.set(config.cache.prefixes.token + token, data, (error, data) => {
+        if (error) {
+          return reject(error)
+        }
+        resolve()
+      })
+    })
+  }
+  
+  getSession(token) {
+    return new Promise((resolve, reject) => {
+      this.client.get(token, (error, session) => {
+        if (error) {
+          return reject(error)
+        }
+        resolve(session)
+      })
+    })
+  }
 
   close() {
     this.client.quit()
-    
+
     logger.log(`Connection to redis has been closed voluntarily.`)
 
     return Promise.resolve()
