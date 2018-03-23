@@ -1,6 +1,7 @@
 module.exports = {
   login: {
     name: 'login',
+    submitButtonLabel: 'Login',
     fields: [
       {
         name: 'username',
@@ -16,6 +17,7 @@ module.exports = {
   },
   register: {
     name: 'register',
+    submitButtonLabel: 'Register',
     fields: [
       {
         name: 'username',

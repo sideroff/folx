@@ -6,7 +6,7 @@ const db = require("./../connectors/database")
 
 module.exports = {
   login: (params, res) => {
-    return Promise.resolve({ username: "gosho", token: "1111-111111-11111111-1111" })
+    return Promise.resolve({ username: "gosho", token: "1111-111111-11111111-1111", email: 'gosho@abv.bg' })
   },
   register: (params, res) => {
     return new Promise((resolve, reject) => {

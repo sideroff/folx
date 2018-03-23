@@ -19,6 +19,7 @@ export default class Form extends React.Component {
                 placeholder={f.placeholder}
                 className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />
             </div>)}
+          <input type="submit" value={this.props.config.submitButtonLabel || 'Submit'} />
         </form>
       </div>
     )

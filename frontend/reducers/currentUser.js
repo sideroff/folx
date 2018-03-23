@@ -8,7 +8,11 @@ let currentUser = {
 }
 
 try {
-  currentUser = JSON.parse(localStorage.getItem('currentUser'))
+  let localStorageCurrentUser = localStorage.getItem('currentUser')
+  if (localStorageCurrentUser) {
+    currentUser = JSON.parse(localStorageCurrentUser)
+  }
+
 } catch (error) {
   // just dont throw parse exception, if we cant parse, app will assume the user is logged out
 }
@@ -16,9 +20,13 @@ try {
 const defaultState = currentUser
 
 export default (state = defaultState, action) => {
-  switch (action) {
-    case actionTypes.CURRENT_USER_CHANGE:
-      return Object.assign({}, state, action.payload)
+
+  switch (action.type) {
+    case actionTypes.LOGIN_SUCCESS:
+      localStorage.setItem('currentUser', JSON.stringify(action.payload))
+      return Object.assign({}, state, action.payload, { isLoggedIn: true })
+    case actionTypes.LOGIN_FAILURE:
+      return Object.assign({}, state, { isLoggedIn: false })
     default:
       return state
   }

@@ -4,7 +4,6 @@ const providers = {
   users: require("./users")
 }
 
-
 module.exports = {
   executeService: (serviceRequest, res) => {
     return new Promise((resolve, reject) => {
