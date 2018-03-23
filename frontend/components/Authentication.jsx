@@ -18,12 +18,11 @@ class Authentication extends React.Component {
       <div>
         <div className="authentication">
           <div className="authentication-side-picture"><img src="https://picsum.photos/300/300/?random" alt="" /></div>
-          <Route exact path="/register" component={RegisterForm} />
-          <Route exact path="/login" component={LoginForm} />
-        </div>
-        <div>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+
+          <div>
+            <Route exact path="/register" component={RegisterForm} />
+            <Route exact path="/login" component={LoginForm} />
+          </div>
         </div>
       </div>
     )

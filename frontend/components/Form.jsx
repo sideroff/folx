@@ -15,6 +15,7 @@ export default class Form extends React.Component {
                 onChange={this.props.onChange}
                 type={f.type || 'text'}
                 name={f.name}
+                value={this.props.formValues[f.name]}
                 placeholder={f.placeholder}
                 className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />
             </div>)}

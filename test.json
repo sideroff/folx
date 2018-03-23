@@ -1,0 +1,21 @@
+{
+  "users": {
+    "current": null,
+    "isLoggingIn": false
+  },
+  "flags": {
+    "isMobileMenuActive": false,
+    "activeAuthenticationForm": null
+  },
+  "forms": {
+    "login": {
+      "username": "",
+      "password": ""
+    },
+    "register": {
+      "username": "",
+      "password": "",
+      "confirmPassword": ""
+    }
+  }
+}
