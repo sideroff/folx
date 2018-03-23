@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Form from './Form.jsx'
 import { login as loginFormConfig } from './../forms'
@@ -9,7 +9,8 @@ import requestDispatcher from './../services/requestDispatcher'
 
 function mapStateToProps(state) {
   return {
-    loginForm: state.forms.login
+    loginForm: state.forms.login,
+    onAuthRedirect: state.flags.onAuthRedirect
   }
 }
 
@@ -18,13 +19,16 @@ function mapDispatchToProps(dispatch) {
     dispatchFormChange: (name, value) => {
       dispatch({ type: actionTypes.LOGIN_FORM_FIELD_CHANGE, payload: { name, value } })
     },
-    loginUser: (params) => {
+    loginUser: (params, onAuthRedirect) => {
       dispatch({ type: actionTypes.LOGIN_REQUEST, payload: params })
-      requestDispatcher.requestToServer('users.login', params).then(response => {
-        dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: response })
-        // TODO: redirect to previously requested page, try withRouter
-      }).catch(error => {
-        dispatch({ type: actionTypes.LOGIN_FAILURE, params: error })
+      return new Promise((resolve, reject) => {
+        requestDispatcher.requestToServer('users.login', params).then(response => {
+          dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: response })
+          resolve()
+        }).catch(error => {
+          dispatch({ type: actionTypes.LOGIN_FAILURE, params: error })
+          reject(error)
+        })
       })
 
     }
@@ -40,12 +44,15 @@ class LoginForm extends React.Component {
     event.preventDefault()
 
     // TODO: do validity checks
-
-    this.props.loginUser(this.props.loginForm)
+    console.dir(this.props)
+    this.props.loginUser(this.props.loginForm, this.props.onAuthRedirect).then(() => {
+      this.props.history.push(this.props.onAuthRedirect)
+    }).catch(error => {
+      // nothing, action has already been dispatched
+    })
   }
 
   onChange(event) {
-    event.preventDefault()
     this.props.dispatchFormChange(event.target.name, event.target.value)
   }
 
@@ -62,4 +69,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm))
