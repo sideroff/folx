@@ -44,7 +44,10 @@ module.exports = {
         resolve("Registration was successful")
       }).catch(error => {
         if (error.code === 11000) {
-          let [fullMatch, constraintType, database, table, field] = error.message.match(/^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g)
+          let values = error.message.match(/^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g)
+
+          let [fullMatch, constraintType, database, table, field] = values
+          let exception = exceptions.raise(exceptions.databaseDuplicate, values.slice(1))
           logger.log(JSON.stringify(error))
         }
         reject(exceptions.databaseException)
