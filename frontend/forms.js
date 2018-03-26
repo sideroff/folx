@@ -33,8 +33,12 @@ module.exports = {
         name: 'confirmPassword',
         type: 'password',
         placeholder: 'Confirm Password'
-      }
-
+      },
+      {
+        name: 'email',
+        type: 'email',
+        placeholder: 'Email'
+      },
     ]
   }
 }

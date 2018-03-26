@@ -55,8 +55,13 @@ module.exports = {
   parseMongooseErrorMessage: (msg) => {
 
     let rgx = /^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g
+    let values
 
-    let values = rgx.exec(msg)
+    try {
+      values = rgx.exec(msg)
+    } catch (error) {
+      return
+    }
 
     let [fullMatch, errorCode, constraintType, database, table, field] = values
 

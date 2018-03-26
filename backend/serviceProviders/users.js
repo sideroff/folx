@@ -46,11 +46,13 @@ module.exports = {
         let exception = exceptions.databaseException
 
         if (error.code === 11000) {
-          error = utils.parseMongooseErrorMessage(error.message)
-
-          let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(error.field);
-          if (exceptions[exceptionCode]) {
-            exception = exceptions[exceptionCode]
+          let parsedMessage = utils.parseMongooseErrorMessage(error.message)
+          if (parsedMessage) {
+            let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(error.field)
+            let correctException = exceptions[exceptionCode]
+            if (correctException) {
+              exception = correctException
+            }
           }
         }
 
