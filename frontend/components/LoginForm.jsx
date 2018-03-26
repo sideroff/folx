@@ -15,6 +15,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  // having
+  // return { dispatch }
+  // will eliminate some of the govno kod here
   return {
     dispatchFormChange: (name, value) => {
       dispatch({ type: actionTypes.LOGIN_FORM_FIELD_CHANGE, payload: { name, value } })
