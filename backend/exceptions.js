@@ -22,5 +22,9 @@ module.exports = {
   databaseException: {
     code: "databaseException",
     message: "There was a problem with the database."
+  },
+  duplicateUserEmail: {
+    code: "duplicateUserEmail",
+    message: "There is already a user with that email."
   }
 }

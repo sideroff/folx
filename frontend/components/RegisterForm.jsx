@@ -13,7 +13,6 @@ function mapStateToProps(state) {
   }
 }
 
-
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props)

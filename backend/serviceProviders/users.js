@@ -43,14 +43,18 @@ module.exports = {
       new db.models.User(params).save().then(result => {
         resolve("Registration was successful")
       }).catch(error => {
-        if (error.code === 11000) {
-          let values = error.message.match(/^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g)
+        let exception = exceptions.databaseException
 
-          let [fullMatch, constraintType, database, table, field] = values
-          //exception = exceptions.raise(exceptions.databaseDuplicate, values.slice(1))
-          logger.log(JSON.stringify(error))
+        if (error.code === 11000) {
+          error = utils.parseMongooseErrorMessage(error.message)
+
+          let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(error.field);
+          if (exceptions[exceptionCode]) {
+            exception = exceptions[exceptionCode]
+          }
         }
-        reject(exceptions.databaseException)
+
+        reject(exception)
       })
     })
   }

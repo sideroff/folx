@@ -51,5 +51,18 @@ module.exports = {
     hash.update(str)
 
     return hash.digest("hex")
+  },
+  parseMongooseErrorMessage: (msg) => {
+
+    let rgx = /^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g
+
+    let values = rgx.exec(msg)
+
+    let [fullMatch, errorCode, constraintType, database, table, field] = values
+
+    return { fullMatch, errorCode, constraintType, database, table, field }
+  },
+  capitalizeFirstLetter: (str) => {
+    return typeof str === "string" ? str.charAt(0).toUpperCase() + str.slice(1) : ""
   }
 }
