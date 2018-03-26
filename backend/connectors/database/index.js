@@ -33,6 +33,7 @@ module.exports = {
         socketTimeoutMS: 480000,
         keepAlive: 300000
       }
+
       mongoose.connect(config.database.connectionString, options).then(connection => {
         connection = connection
         initializeModels()

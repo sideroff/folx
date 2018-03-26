@@ -1,6 +1,9 @@
 class Logger {
+  constructor() {
+    this.signature = process.pid + ':\t'
+  }
   log() {
-    console.log.apply(console, [...arguments, process.pid])
+    console.log.apply(console, [this.signature, ...arguments])
   }
 }
 

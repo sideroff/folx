@@ -4,6 +4,7 @@ const config = require("./../../config")
 const exceptions = require("./../exceptions")
 const db = require("./../connectors/database")
 const cache = require("./../connectors/cache")
+const logger = require("./../logger")
 
 
 module.exports = {
@@ -42,6 +43,10 @@ module.exports = {
       new db.models.User(params).save().then(result => {
         resolve("Registration was successful")
       }).catch(error => {
+        if (error.code === 11000) {
+          let [fullMatch, constraintType, database, table, field] = error.message.match(/^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g)
+          logger.log(JSON.stringify(error))
+        }
         reject(exceptions.databaseException)
       })
     })

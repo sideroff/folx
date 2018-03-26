@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Form from './Form.jsx'
 import { register as registerFormConfig } from './../forms'
 import actionTypes from './../actionTypes'
+import requestDispatcher from './../services/requestDispatcher'
 
 function mapStateToProps(state) {
   return {
@@ -16,6 +17,19 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchFormChange: (name, value) => {
       dispatch({ type: actionTypes.REGISTER_FORM_FIELD_CHANGE, payload: { name, value } })
+    },
+    registerUser: user => {
+      return new Promise((resolve, reject) => {
+        dispatch({ type: actionTypes.REGISTER_REQUEST, payload: user })
+
+        requestDispatcher.requestToServer('users.register', user).then(result => {
+          dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: result })
+          resolve(result)
+        }).catch(error => {
+          dispatch({ type: actionTypes.REGISTER_FAILURE, payload: error })
+          reject()
+        })
+      })
     }
   }
 }
@@ -25,10 +39,14 @@ class RegisterForm extends React.Component {
     super(props)
   }
 
-  onSubmit() {
+  onSubmit(event) {
     event.preventDefault()
-    console.log('register submit')
 
+    this.props.registerUser(this.props.registerForm).then(result => {
+      this.props.history.push('/')
+    }).catch(error => {
+      // nothing, the error has been dispatched already
+    })
   }
 
   onChange(event) {
@@ -53,4 +71,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm))
