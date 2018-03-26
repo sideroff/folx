@@ -29,5 +29,4 @@ class Authentication extends React.Component {
   }
 }
 
-
 export default Authentication

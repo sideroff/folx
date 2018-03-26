@@ -47,7 +47,7 @@ module.exports = {
           let values = error.message.match(/^(\w+)[\w\s]+\s([\w]+):\s(.+)\.(.+)\.\$(.+)_[\d]+/g)
 
           let [fullMatch, constraintType, database, table, field] = values
-          let exception = exceptions.raise(exceptions.databaseDuplicate, values.slice(1))
+          //exception = exceptions.raise(exceptions.databaseDuplicate, values.slice(1))
           logger.log(JSON.stringify(error))
         }
         reject(exceptions.databaseException)

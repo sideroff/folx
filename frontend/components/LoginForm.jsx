@@ -14,30 +14,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  // having
-  // return { dispatch }
-  // will eliminate some of the govno kod here
-  return {
-    dispatchFormChange: (name, value) => {
-      dispatch({ type: actionTypes.LOGIN_FORM_FIELD_CHANGE, payload: { name, value } })
-    },
-    loginUser: (params, onAuthRedirect) => {
-      dispatch({ type: actionTypes.LOGIN_REQUEST, payload: params })
-      return new Promise((resolve, reject) => {
-        requestDispatcher.requestToServer('users.login', params).then(response => {
-          dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: response })
-          resolve()
-        }).catch(error => {
-          dispatch({ type: actionTypes.LOGIN_FAILURE, params: error })
-          reject(error)
-        })
-      })
-
-    }
-  }
-}
-
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
@@ -47,16 +23,28 @@ class LoginForm extends React.Component {
     event.preventDefault()
 
     // TODO: do validity checks
+
     console.dir(this.props)
-    this.props.loginUser(this.props.loginForm, this.props.onAuthRedirect).then(() => {
+
+    this.props.dispatch({ type: actionTypes.LOGIN_REQUEST, payload: this.props.loginForm })
+
+    requestDispatcher.requestToServer('users.login', this.props.loginForm).then(response => {
+      this.props.dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: response })
       this.props.history.push(this.props.onAuthRedirect)
     }).catch(error => {
-      // nothing, action has already been dispatched
+      this.props.dispatch({ type: actionTypes.LOGIN_FAILURE, params: error })
     })
   }
 
   onChange(event) {
-    this.props.dispatchFormChange(event.target.name, event.target.value)
+    this.props.dispatch(
+      {
+        type: actionTypes.LOGIN_FORM_FIELD_CHANGE,
+        payload: {
+          name: event.target.name,
+          value: event.target.value
+        }
+      })
   }
 
   render() {
@@ -72,4 +60,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm))
+export default withRouter(connect(mapStateToProps, (dispatch) => { return { dispatch } })(LoginForm))

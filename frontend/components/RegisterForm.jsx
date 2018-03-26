@@ -13,26 +13,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatchFormChange: (name, value) => {
-      dispatch({ type: actionTypes.REGISTER_FORM_FIELD_CHANGE, payload: { name, value } })
-    },
-    registerUser: user => {
-      return new Promise((resolve, reject) => {
-        dispatch({ type: actionTypes.REGISTER_REQUEST, payload: user })
-
-        requestDispatcher.requestToServer('users.register', user).then(result => {
-          dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: result })
-          resolve(result)
-        }).catch(error => {
-          dispatch({ type: actionTypes.REGISTER_FAILURE, payload: error })
-          reject()
-        })
-      })
-    }
-  }
-}
 
 class RegisterForm extends React.Component {
   constructor(props) {
@@ -42,16 +22,26 @@ class RegisterForm extends React.Component {
   onSubmit(event) {
     event.preventDefault()
 
-    this.props.registerUser(this.props.registerForm).then(result => {
+    this.props.dispatch({ type: actionTypes.REGISTER_REQUEST, payload: this.props.registerForm })
+
+    requestDispatcher.requestToServer('users.register', this.props.registerForm).then(result => {
+      this.props.dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: result })
       this.props.history.push('/')
     }).catch(error => {
-      // nothing, the error has been dispatched already
+      this.props.dispatch({ type: actionTypes.REGISTER_FAILURE, payload: error })
     })
   }
 
   onChange(event) {
-    event.preventDefault()
-    this.props.dispatchFormChange(event.target.name, event.target.value)
+    this.props.dispatch(
+      {
+        type: actionTypes.REGISTER_FORM_FIELD_CHANGE,
+        payload: {
+          name: event.target.name,
+          value: event.target.value
+        }
+      }
+    )
   }
 
   render() {
@@ -71,4 +61,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterForm))
+export default withRouter(connect(mapStateToProps, (dispatch) => { return { dispatch } })(RegisterForm))
