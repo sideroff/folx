@@ -29,15 +29,15 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
       state = Object.assign({}, state, action.payload, { isLoggedIn: true })
-      setCurrentUserInLocalStorate()
+      setCurrentUserInLocalStorate(state)
       return state
     case actionTypes.LOGIN_FAILURE:
       state = Object.assign({}, state, { isLoggedIn: false })
-      setCurrentUserInLocalStorate()
+      setCurrentUserInLocalStorate(state)
       return
     case actionTypes.LOGOUT:
       state = getDefaultCurrentUser()
-      setCurrentUserInLocalStorate()
+      setCurrentUserInLocalStorate(state)
       return state
     default:
       return state

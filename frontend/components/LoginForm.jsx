@@ -24,8 +24,6 @@ class LoginForm extends React.Component {
 
     // TODO: do validity checks
 
-    console.dir(this.props)
-
     this.props.dispatch({ type: actionTypes.LOGIN_REQUEST, payload: this.props.loginForm })
 
     requestDispatcher.requestToServer('users.login', this.props.loginForm).then(response => {
