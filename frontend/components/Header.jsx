@@ -6,6 +6,7 @@ import actionTypes from './../actionTypes'
 
 function mapStateToProps(state) {
   return {
+    currentUser: state.currentUser,
     isMobileMenuActive: state.flags.isMobileMenuActive
   }
 }
@@ -57,7 +58,7 @@ class Header extends React.Component {
             <Link to='/about'>About</Link>
           </nav>
           <div className="greeting">
-            <span>Hello, guest!</span>
+            <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
           </div>
           <div onClick={this.onOverlayClick} className="header-overlay"></div>
         </div>

@@ -10,7 +10,11 @@ let currentUser = {
 try {
   let localStorageCurrentUser = localStorage.getItem('currentUser')
   if (localStorageCurrentUser) {
-    currentUser = JSON.parse(localStorageCurrentUser)
+    localStorageCurrentUser = JSON.parse(localStorageCurrentUser)
+    if (localStorageCurrentUser.token) {
+      currentUser = localStorageCurrentUser
+      currentUser.isLoggedIn = true
+    }
   }
 
 } catch (error) {
