@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import actionTypes from './../actionTypes'
 
@@ -11,32 +11,35 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    toggleMobileMenu(value) {
-      dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: value })
-    }
-  }
-}
-
 class Header extends React.Component {
   constructor(props) {
     super(props)
 
     this.onHamburgerClick = this.onHamburgerClick.bind(this)
     this.onOverlayClick = this.onOverlayClick.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   onHamburgerClick(event) {
     event.preventDefault()
 
-    this.props.toggleMobileMenu(!this.props.isMobileMenuActive)
+    this.props.dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: !this.props.isMobileMenuActive })
   }
 
   onOverlayClick(event) {
     event.preventDefault()
 
-    this.props.toggleMobileMenu(false)
+    this.props.dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: false })
+  }
+
+  logout(event) {
+    event.preventDefault()
+
+    if (this.props.currentUser.isLoggedIn) {
+      this.props.dispatch({ type: actionTypes.LOGOUT })
+      // TODO add popup
+      this.props.history.push('/')
+    }
   }
 
   render() {
@@ -59,6 +62,7 @@ class Header extends React.Component {
           </nav>
           <div className="greeting">
             <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
+            {this.props.currentUser.isLoggedIn ? <span onClick={this.logout}> Logout!</span> : ''}
           </div>
           <div onClick={this.onOverlayClick} className="header-overlay"></div>
         </div>
@@ -67,4 +71,4 @@ class Header extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default withRouter(connect(mapStateToProps, (dispatch) => { return { dispatch } })(Header))

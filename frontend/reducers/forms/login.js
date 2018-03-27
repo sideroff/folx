@@ -1,9 +1,12 @@
 import actionTypes from './../../actionTypes'
+import forms from './../../forms'
 
-const defaultState = {
-  username: '',
-  password: ''
-}
+let formFields = forms.login.fields.map(f => f.name)
+
+let defaultState = {}
+formFields.forEach(f => {
+  defaultState[f] = ''
+})
 
 export default (state = defaultState, action = {}) => {
   switch (action.type) {

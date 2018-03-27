@@ -26,5 +26,10 @@ module.exports = {
   duplicateUserEmail: {
     code: "duplicateUserEmail",
     message: "There is already a user with that email."
+  },
+  invalidCredentials: {
+    code: "invalidCredentials",
+    message: "There is already a user with that email."
   }
+
 }
