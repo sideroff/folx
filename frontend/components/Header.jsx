@@ -28,7 +28,6 @@ class Header extends React.Component {
 
   closeMobileMenu(event) {
     event.preventDefault()
-    console.log('here boiii')
 
     this.props.dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: false })
   }
