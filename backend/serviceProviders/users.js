@@ -6,7 +6,6 @@ const db = require("./../connectors/database")
 const cache = require("./../connectors/cache")
 const logger = require("./../logger")
 
-
 module.exports = {
   login: (params, res) => {
     return new Promise((resolve, reject) => {

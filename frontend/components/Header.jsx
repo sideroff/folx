@@ -16,7 +16,7 @@ class Header extends React.Component {
     super(props)
 
     this.onHamburgerClick = this.onHamburgerClick.bind(this)
-    this.onOverlayClick = this.onOverlayClick.bind(this)
+    this.closeMobileMenu = this.closeMobileMenu.bind(this)
     this.logout = this.logout.bind(this)
   }
 
@@ -26,8 +26,9 @@ class Header extends React.Component {
     this.props.dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: !this.props.isMobileMenuActive })
   }
 
-  onOverlayClick(event) {
+  closeMobileMenu(event) {
     event.preventDefault()
+    console.log('here boiii')
 
     this.props.dispatch({ type: actionTypes.TOGGLE_MOBILE_MENU, payload: false })
   }
@@ -55,16 +56,18 @@ class Header extends React.Component {
             </Link>
           </div>
           <nav className="header-nav">
-            <Link to='/profile'>Profile</Link>
-            <Link to='/ad-create'>New Ad</Link>
-            <Link to='/ads'>Posts</Link>
-            <Link to='/about'>About</Link>
+            <div onClick={this.closeMobileMenu}>
+              <Link to='/profile'>Profile</Link>
+              <Link to='/ad-create'>New Ad</Link>
+              <Link to='/ads'>Posts</Link>
+              <Link to='/about'>About</Link>
+            </div>
           </nav>
           <div className="greeting">
             <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
             {this.props.currentUser.isLoggedIn ? <span onClick={this.logout}> Logout!</span> : ''}
           </div>
-          <div onClick={this.onOverlayClick} className="header-overlay"></div>
+          <div onClick={this.closeMobileMenu} className="header-overlay"></div>
         </div>
       </header>
     )
