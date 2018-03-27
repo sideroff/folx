@@ -56,6 +56,9 @@ class Header extends React.Component {
             <Link to='/ads'>Posts</Link>
             <Link to='/about'>About</Link>
           </nav>
+          <div className="greeting">
+            <span>Hello, guest!</span>
+          </div>
           <div onClick={this.onOverlayClick} className="header-overlay"></div>
         </div>
       </header>

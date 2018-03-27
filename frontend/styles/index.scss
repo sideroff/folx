@@ -57,6 +57,10 @@ header {
   height: $header-height;
 }
 
+.main-content {
+  margin: 1em;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -134,6 +138,17 @@ input:focus {
 .authentication-side-picture {
   align-self: center;
   justify-self: center;
+}
+
+.authentication-form-wrapper {
+  border-left: 2px solid $primary-color-light;
+  padding: 0.5em;
+}
+
+.greeting {
+  display: table-cell;
+  white-space: nowrap;
+  padding-right: 2em;
 }
 
 
