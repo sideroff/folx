@@ -1,5 +1,7 @@
 import actionTypes from './../actionTypes'
 
+const currentUseKey = 'currentUser'
+
 function getDefaultCurrentUser() {
   return {
     isLoggedIn: false,
@@ -13,7 +15,7 @@ function getDefaultCurrentUser() {
 let currentUser = getDefaultCurrentUser()
 
 try {
-  let localStorageCurrentUser = localStorage.getItem('currentUser')
+  let localStorageCurrentUser = localStorage.getItem(currentUseKey)
   if (localStorageCurrentUser) {
     localStorageCurrentUser = JSON.parse(localStorageCurrentUser)
     currentUser = localStorageCurrentUser
@@ -45,5 +47,5 @@ export default (state = defaultState, action) => {
 }
 
 function setCurrentUserInLocalStorate(state) {
-  localStorage.setItem('currentUser', JSON.stringify(state))
+  localStorage.setItem(currentUseKey, JSON.stringify(state))
 }

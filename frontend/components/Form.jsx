@@ -12,6 +12,7 @@ export default class Form extends React.Component {
           {this.props.config.fields.map((f, i) =>
             <div key={i}>
               <input
+                required={!f.notRequired}
                 onChange={this.props.onChange}
                 type={f.type || 'text'}
                 name={f.name}
@@ -21,6 +22,13 @@ export default class Form extends React.Component {
             </div>)}
           <input type="submit" value={this.props.config.submitButtonLabel || 'Submit'} />
         </form>
+        {this.props.failureMessage &&
+          <div
+            className="form-failure-message"
+            onClick={this.props.dismissMessage}>
+            {this.props.failureMessage.message}
+          </div>
+        }
       </div>
     )
   }

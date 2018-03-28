@@ -9,13 +9,18 @@ import requestDispatcher from './../services/requestDispatcher'
 
 function mapStateToProps(state) {
   return {
-    registerForm: state.forms.register
+    registerForm: state.forms.register,
+    failureMessage: state.messages[actionTypes.REGISTER_FAILURE]
   }
 }
 
 class RegisterForm extends React.Component {
   constructor(props) {
     super(props)
+  }
+  dismissMessage() {
+    console.log('here 11')
+    this.props.dispatch({ type: actionTypes.DISMISS_MESSAGE, payload: actionTypes.REGISTER_FAILURE })
   }
 
   onSubmit(event) {
@@ -25,7 +30,7 @@ class RegisterForm extends React.Component {
 
     requestDispatcher.requestToServer('users.register', this.props.registerForm).then(result => {
       this.props.dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: result })
-      this.props.history.push('/')
+      //this.props.history.push('/')
     }).catch(error => {
       this.props.dispatch({ type: actionTypes.REGISTER_FAILURE, payload: error })
     })
@@ -50,7 +55,10 @@ class RegisterForm extends React.Component {
           config={registerFormConfig}
           formValues={this.props.registerForm}
           onChange={this.onChange.bind(this)}
-          onSubmit={this.onSubmit.bind(this)} />
+          onSubmit={this.onSubmit.bind(this)}
+          failureMessage={this.props.failureMessage}
+          dismissMessage={this.dismissMessage.bind(this)}
+        />
         <div>
           <span>Already registered?</span>
           <Link to="/login">Login</Link>

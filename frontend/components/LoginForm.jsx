@@ -10,7 +10,8 @@ import requestDispatcher from './../services/requestDispatcher'
 function mapStateToProps(state) {
   return {
     loginForm: state.forms.login,
-    onAuthRedirect: state.flags.onAuthRedirect
+    onAuthRedirect: state.flags.onAuthRedirect,
+    failureMessage: state.messages[actionTypes.LOGIN_FAILURE]
   }
 }
 
@@ -48,7 +49,13 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div>
-        <Form config={loginFormConfig} formValues={this.props.loginForm} onChange={this.onChange.bind(this)} onSubmit={this.onSubmit.bind(this)} />
+        <Form
+          config={loginFormConfig}
+          formValues={this.props.loginForm}
+          onChange={this.onChange.bind(this)}
+          onSubmit={this.onSubmit.bind(this)}
+          failureMessage={this.props.failureMessage}
+        />
         <div>
           <span>Not registered?</span>
           <Link to="/register">Register</Link>
