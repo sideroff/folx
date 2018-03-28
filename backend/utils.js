@@ -1,7 +1,7 @@
 const path = require("path")
 const crypto = require("crypto")
 
-const exceptions = require("./exceptions")
+const messages = require("./messages")
 const logger = require("./logger")
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
       response = JSON.stringify(response)
     } catch (error) {
       logger.log(`Request handler responded with an unstrigifiable response (most probably circular reference). Debug necessary.`)
-      response = JSON.stringify({ error: exceptions.friendlyError })
+      response = JSON.stringify({ error: messages.friendlyError })
     }
 
     return response
@@ -39,7 +39,7 @@ module.exports = {
     return parentTokens.every((t, i) => childTokens[i] === t)
   },
   isNotStandartError: error => {
-    return !error || typeof error !== "object" || !exceptions[error.code]
+    return !error || typeof error !== "object" || !messages[error.code]
   },
   generateRandomString: (length) => {
     return crypto.randomBytes(Math.ceil(length / 2))

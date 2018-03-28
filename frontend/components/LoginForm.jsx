@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
       this.props.dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: response })
       this.props.history.push(this.props.onAuthRedirect)
     }).catch(error => {
-      this.props.dispatch({ type: actionTypes.LOGIN_FAILURE, params: error })
+      this.props.dispatch({ type: actionTypes.LOGIN_FAILURE, payload: error })
     })
   }
 
@@ -46,6 +46,10 @@ class LoginForm extends React.Component {
       })
   }
 
+  dismissMessage() {
+    this.props.dispatch({ type: actionTypes.DISMISS_MESSAGE, payload: actionTypes.LOGIN_FAILURE })
+  }
+
   render() {
     return (
       <div>
@@ -55,6 +59,7 @@ class LoginForm extends React.Component {
           onChange={this.onChange.bind(this)}
           onSubmit={this.onSubmit.bind(this)}
           failureMessage={this.props.failureMessage}
+          dismissMessage={this.dismissMessage.bind(this)}
         />
         <div>
           <span>Not registered?</span>

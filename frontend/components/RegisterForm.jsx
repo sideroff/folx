@@ -18,6 +18,7 @@ class RegisterForm extends React.Component {
   constructor(props) {
     super(props)
   }
+
   dismissMessage() {
     console.log('here 11')
     this.props.dispatch({ type: actionTypes.DISMISS_MESSAGE, payload: actionTypes.REGISTER_FAILURE })

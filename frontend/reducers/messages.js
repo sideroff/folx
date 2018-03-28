@@ -14,6 +14,9 @@ export default (state = defaultState, action) => {
     case actionTypes.REGISTER_FAILURE:
       stateAddition[actionTypes.REGISTER_FAILURE] = action.payload
       return Object.assign({}, state, stateAddition)
+    case actionTypes.LOGIN_FAILURE:
+      stateAddition[actionTypes.LOGIN_FAILURE] = action.payload
+      return Object.assign({}, state, stateAddition)
     default:
       return state
   }

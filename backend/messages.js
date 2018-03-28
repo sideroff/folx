@@ -23,13 +23,32 @@ module.exports = {
     code: "databaseException",
     message: "There was a problem with the database."
   },
+  duplicateUserUsername: {
+    code: "duplicateUserUsername",
+    message: "There is already a user with that username."
+  },
   duplicateUserEmail: {
     code: "duplicateUserEmail",
     message: "There is already a user with that email."
   },
   invalidCredentials: {
     code: "invalidCredentials",
-    message: "There is already a user with that email."
+    message: "The credentials you've entered are invalid."
+  },
+  invalidUsername: {
+    code: "invalidUsername",
+    message: "The username you've entered is invalid."
+  },
+  invalidPassword: {
+    code: "invalidPassword",
+    message: "The password you've entered is invalid."
+  },
+  invalidConfirmPassword: {
+    code: "invalidConfirmPassword",
+    message: "The password and confirm password fields are not the same."
+  },
+  registrationSuccessful: {
+    code: "registrationSuccessful",
+    message: "You have registered successfully."
   }
-
 }

@@ -36,7 +36,7 @@ export default (state = defaultState, action) => {
     case actionTypes.LOGIN_FAILURE:
       state = Object.assign({}, state, { isLoggedIn: false })
       setCurrentUserInLocalStorate(state)
-      return
+      return state
     case actionTypes.LOGOUT:
       state = getDefaultCurrentUser()
       setCurrentUserInLocalStorate(state)

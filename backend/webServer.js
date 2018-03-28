@@ -2,7 +2,7 @@ const http = require("http")
 const path = require("path")
 const fs = require("fs")
 
-const exceptions = require("./exceptions")
+const messages = require("./messages")
 const config = require("./../config")
 const logger = require("./logger")
 const utils = require("./utils")
@@ -23,12 +23,12 @@ function handlePostRequest(req, res) {
       try {
         body = JSON.parse(body)
       } catch (error) {
-        return reject(exceptions.badRequest)
+        return reject(messages.badRequest)
       }
 
       let serviceRequest = utils.parseServiceRequest(body)
       if (!serviceRequest) {
-        return reject(exceptions.invalidServiceRequest)
+        return reject(messages.invalidServiceRequest)
       }
 
       serviceProviders.executeService(serviceRequest, res).then(result => {
@@ -54,7 +54,7 @@ function handleGetRequest(req, res) {
     res.writeHead(error.httpCode || 200)
 
     if (utils.isNotStandartError(error)) {
-      error = exceptions.friendlyError
+      error = messages.friendlyError
     }
 
     error = utils.toStandartError(error)
@@ -79,19 +79,19 @@ function handleFileRequest(req, res) {
 
     let mime = config.webServer.publiclyAccessibleFileExtToMime[ext]
     if (!mime) {
-      return reject(exceptions.invalidFile)
+      return reject(messages.invalidFile)
     }
 
     let filePath = path.normalize(config.webServer.publicFolderPath + filename)
 
 
     if (!utils.isSubdirectoryOf(filePath, config.webServer.publicFolderPath)) {
-      return reject(exceptions.invalidFile)
+      return reject(messages.invalidFile)
     }
 
     fs.stat(filePath, (error, stats) => {
       if (error) {
-        return reject(exceptions.invalidFile)
+        return reject(messages.invalidFile)
       }
 
       let buffer = fs.createReadStream(filePath)
@@ -110,7 +110,7 @@ function requestListener(req, res) {
   else if (req.method === "POST" && req.url.startsWith("/api")) {
     handler = handlePostRequest
   } else {
-    handler = (req, res) => Promise.reject(exceptions.badRequest)
+    handler = (req, res) => Promise.reject(messages.badRequest)
   }
 
   handler(req, res).then(data => {
@@ -128,7 +128,7 @@ function requestListener(req, res) {
 
     if (utils.isNotStandartError(error)) {
       logger.log(`Request handler responded with unhandled error. ${JSON.stringify(error)}`)
-      error = exceptions.friendlyError
+      error = messages.friendlyError
     }
 
     error = utils.toStandartError(error)
@@ -145,7 +145,7 @@ function initialize() {
     const server = http.createServer(requestListener)
 
     server.on("error", error => {
-      logger.log(`Web server encountered an error ${error}`)
+      logger.log(`Web server encountered an error ${JSON.stringify(error)}`)
       reject(error)
     })
 

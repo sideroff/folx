@@ -25,7 +25,8 @@ export default class Form extends React.Component {
         {this.props.failureMessage &&
           <div
             className="form-failure-message"
-            onClick={this.props.dismissMessage}>
+            onClick={this.props.dismissMessage}
+            title="Click to dismiss">
             {this.props.failureMessage.message}
           </div>
         }
