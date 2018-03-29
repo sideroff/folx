@@ -9,6 +9,8 @@ header {
   -webkit-box-shadow: $primary-shadow;
   -moz-box-shadow: $primary-shadow;
   box-shadow: $primary-shadow;
+  position: fixed;
+  top: 0;
 
   .header-top-bar {
     background-color: $primary-color-dark;
@@ -57,8 +59,9 @@ header {
   height: $header-height;
 }
 
-.main-content {
+main {
   margin: 1em;
+  margin-top: $header-height + 1em;
 }
 
 .card-grid {

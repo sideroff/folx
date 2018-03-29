@@ -4,14 +4,14 @@
   }
 
   header {
+    width: 100%;
 
     .header-mobile-hamburger {
       display: flex;
       align-items: center;
       position: absolute;
-      padding: 0 0.8em;
+      padding: 0 1.2em;
       height: $header-height - $header-top-bar-height;
-      font-size: x-large;
       transition: all 0.5s;
       cursor: pointer;
     }
@@ -37,7 +37,7 @@
       width: 40%;
       height: 100%;
       background: $primary-color-dark;
-      position: absolute;
+      position: fixed;
       z-index: 2;
       top: $header-height;
       transform: translateX(-100%);
@@ -59,7 +59,7 @@
     }
 
     .header-overlay {
-      position: absolute;
+      position: fixed;
       top: $header-height;
       height: 100%;
       width: 100%;
@@ -71,7 +71,7 @@
     .header-main.active .header-overlay {
       display: block;
     }
-    
+
     .greeting {
       display: none
     }

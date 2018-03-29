@@ -16,7 +16,7 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <div className='main-content'>
+      <main>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/profile" component={RequireAuth(Profile, '/profile')} />
@@ -25,7 +25,7 @@ export default class Main extends React.Component {
           <Route exact path="/register" component={Authentication} />
           <Route component={NotFound} />
         </Switch>
-      </div>
+      </main>
     )
   }
 }
