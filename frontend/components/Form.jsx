@@ -11,14 +11,18 @@ export default class Form extends React.Component {
         <form action='#' onSubmit={this.props.onSubmit} className={'form ' + (this.props.config.customClasses || '')}>
           {this.props.config.fields.map((f, i) =>
             <div key={i}>
-              <input
+              {f.type !== 'select' && <input
                 required={!f.notRequired}
                 onChange={this.props.onChange}
                 type={f.type || 'text'}
                 name={f.name}
                 value={this.props.formValues[f.name]}
                 placeholder={f.placeholder}
-                className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />
+                className={(this.props.config.fieldCustomClasses || '') + (f.customClasses || '')} />}
+              {f.type == 'select' &&
+                <select name={f.name}>
+                  {f.options.map((o, j) => <option value={o.value}>{o.label}</option>)}
+                </select>}
             </div>)}
           <input type="submit" value={this.props.config.submitButtonLabel || 'Submit'} />
         </form>

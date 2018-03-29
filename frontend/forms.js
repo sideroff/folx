@@ -40,5 +40,25 @@ module.exports = {
         placeholder: 'Email'
       },
     ]
-  }
+  },
+  searchAds: {
+    name: 'searchAds',
+    submitButtonLabel: 'Search',
+    fields: [
+      {
+        name: 'name',
+        type: 'text',
+        placeholder: 'Name'
+      },
+      {
+        name: 'category',
+        type: 'select',
+        placeholder: 'Password',
+        options: [
+          { value: 1, label: 'one' },
+          { value: 2, label: 'two' }
+        ]
+      }
+    ]
+  },
 }
