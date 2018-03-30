@@ -53,7 +53,7 @@ describe("temporary", function () {
         provider: "users",
         service: "login",
         params: {
-          username: "javatsssa",
+          username: "javata",
           password: "javata"
         }
       }
