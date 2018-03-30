@@ -1,5 +1,7 @@
 // https://github.com/istanbuljs/nyc
 
+// tests will be run by heroku using the postbuild hook they provide (check package.json > scripts),
+// that means that if the tests fail, the build will too.
 var assert = require('assert')
 
 describe("temporary", function () {
@@ -37,11 +39,12 @@ describe("temporary", function () {
 
   // runs before each test in this block
   beforeEach(function () {
+    console.log(1)
   })
 
   // runs after each test in this block
   afterEach(function () {
-    console.log(3)
+    console.log(2)
   })
 
   describe('users', () => {
@@ -50,7 +53,8 @@ describe("temporary", function () {
         provider: "users",
         service: "login",
         params: {
-
+          username: "javata",
+          password: "javata"
         }
       }
       it('should resolve', done => {

@@ -37,7 +37,7 @@ class Cache {
       })
     })
   }
-  
+
   getSession(token) {
     return new Promise((resolve, reject) => {
       this.client.get(token, (error, session) => {
@@ -50,11 +50,19 @@ class Cache {
   }
 
   close() {
-    this.client.quit()
+    return new Promise((resolve, reject) => {
+      logger.log(`Connection to redis is getting closed voluntarily.`)
 
-    logger.log(`Connection to redis has been closed voluntarily.`)
+      this.client.quit((error) => {
+        if (error) {
+          return reject(error)
+        }
 
-    return Promise.resolve()
+        logger.log(`Connection to redis has been closed voluntarily.`)
+        resolve()
+      })
+    })
+
   }
 }
 
