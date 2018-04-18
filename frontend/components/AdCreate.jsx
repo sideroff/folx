@@ -21,11 +21,23 @@ class AdCreate extends React.Component {
   }
 
   onChange(event) {
+    let value = event.target.value
+    if (event.target.type === 'number') {
+      try {
+        value = Number(event.target.value)
+      } catch (error) {
+        value = event.target.value
+      }
+    }
+    console.log('change ' + typeof value)
     this.props.dispatch({
-      type: actionTypes.AD_CREATE_FORM_FIELD_CHANGE,
+      type: actionTypes.FORM_FIELD_CHANGE,
       payload: {
-        name: event.target.name,
-        value: event.target.value
+        name: adCreateFormConfig.name,
+        field: {
+          name: event.target.name,
+          value
+        }
       }
     })
   }

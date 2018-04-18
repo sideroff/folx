@@ -1,7 +1,8 @@
 const messages = require("./../messages")
 
 const providers = {
-  users: require("./users")
+  users: require("./users"),
+  ads: require("./ads")
 }
 
 module.exports = {

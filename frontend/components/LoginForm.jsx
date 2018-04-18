@@ -38,10 +38,13 @@ class LoginForm extends React.Component {
   onChange(event) {
     this.props.dispatch(
       {
-        type: actionTypes.LOGIN_FORM_FIELD_CHANGE,
+        type: actionTypes.FORM_FIELD_CHANGE,
         payload: {
-          name: event.target.name,
-          value: event.target.value
+          form: loginFormConfig.name,
+          field: {
+            name: event.target.name,
+            value: event.target.value
+          }
         }
       })
   }

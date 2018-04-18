@@ -39,10 +39,13 @@ class RegisterForm extends React.Component {
   onChange(event) {
     this.props.dispatch(
       {
-        type: actionTypes.REGISTER_FORM_FIELD_CHANGE,
+        type: actionTypes.FORM_FIELD_CHANGE,
         payload: {
-          name: event.target.name,
-          value: event.target.value
+          form: registerFormConfig.name,
+          field: {
+            name: event.target.name,
+            value: event.target.value
+          }
         }
       }
     )

@@ -6,6 +6,7 @@ import { searchAds as searchAdsFormConfig } from './../forms'
 import actionTypes from './../actionTypes'
 
 function mapStateToProps(state) {
+  console.log('searchAds mstp' + JSON.stringify(state))
   return {
     searchAdsForm: state.forms.searchAds
   }
@@ -20,7 +21,16 @@ class SearchForm extends React.Component {
   }
   onChange(event) {
     event.preventDefault()
-    this.props.dispatch({ type: actionTypes.SEARCH_ADS_FORM_FIELD_CHANGE, payload: { name: event.target.name, value: event.target.value } })
+    this.props.dispatch({
+      type: actionTypes.FORM_FIELD_CHANGE,
+      payload: {
+        name: searchAdsFormConfig.name,
+        field: {
+          name: event.target.name,
+          value: event.target.value
+        }
+      }
+    })
   }
   onSubmit(event) {
     event.preventDefault()
@@ -28,6 +38,7 @@ class SearchForm extends React.Component {
   }
 
   render() {
+    console.log('search ads form config ' + JSON.stringify(searchAdsFormConfig))
     console.log('search ads form ' + JSON.stringify(this.props.searchAdsForm))
     return (
       <div>
