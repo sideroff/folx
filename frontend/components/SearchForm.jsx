@@ -6,7 +6,6 @@ import { searchAds as searchAdsFormConfig } from './../forms'
 import actionTypes from './../actionTypes'
 
 function mapStateToProps(state) {
-  console.log('searchAds mstp' + JSON.stringify(state))
   return {
     searchAdsForm: state.forms.searchAds
   }
@@ -38,8 +37,6 @@ class SearchForm extends React.Component {
   }
 
   render() {
-    console.log('search ads form config ' + JSON.stringify(searchAdsFormConfig))
-    console.log('search ads form ' + JSON.stringify(this.props.searchAdsForm))
     return (
       <div>
         <Form
