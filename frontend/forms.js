@@ -65,4 +65,23 @@ module.exports = {
       }
     ]
   },
+  adCreate: {
+    name: 'adCreate',
+    submitButtonLabel: 'Create',
+    fields: [
+      {
+        name: 'name',
+        type: 'text',
+        placeholder: 'Name'
+      }, {
+        name: 'description',
+        type: 'textarea',
+        placeholder: 'Description'
+      }, {
+        name: 'price',
+        type: 'number',
+        placeholder: 'Price'
+      }
+    ]
+  }
 }

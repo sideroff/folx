@@ -16,7 +16,7 @@ module.exports = {
       salt: String
     }
   },
-  Post: {
+  Ad: {
     methods: {
       createPost: function () {
         return this.save();
@@ -35,9 +35,6 @@ module.exports = {
         trim: true,
         minlength: 69,
         maxlength: 1500
-      },
-      phoneNumber: {
-        type: String,
       },
       price: {
         type: Number,

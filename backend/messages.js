@@ -50,5 +50,21 @@ module.exports = {
   registrationSuccessful: {
     code: "registrationSuccessful",
     message: "You have registered successfully."
+  },
+  adNameIsRequired: {
+    code: "adNameIsRequired",
+    message: "Ad name is required."
+  },
+  duplicateAdName: {
+    code: "duplicateAdName",
+    message: "Ad name is already used, please choose another."
+  },
+  adDescriptionIsRequired: {
+    code: "AdDescriptionIsRequired",
+    message: "Ad description is required."
+  },
+  adPriceIsRequired: {
+    code: "adPriceIsRequired",
+    message: "Ad price is required."
   }
 }

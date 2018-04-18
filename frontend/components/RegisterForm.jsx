@@ -20,7 +20,6 @@ class RegisterForm extends React.Component {
   }
 
   dismissMessage() {
-    console.log('here 11')
     this.props.dispatch({ type: actionTypes.DISMISS_MESSAGE, payload: actionTypes.REGISTER_FAILURE })
   }
 
@@ -31,7 +30,7 @@ class RegisterForm extends React.Component {
 
     requestDispatcher.requestToServer('users.register', this.props.registerForm).then(result => {
       this.props.dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: result })
-      //this.props.history.push('/')
+      this.props.history.push('/')
     }).catch(error => {
       this.props.dispatch({ type: actionTypes.REGISTER_FAILURE, payload: error })
     })
