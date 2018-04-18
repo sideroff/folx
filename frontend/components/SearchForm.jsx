@@ -24,7 +24,7 @@ class SearchForm extends React.Component {
     this.props.dispatch({
       type: actionTypes.FORM_FIELD_CHANGE,
       payload: {
-        name: searchAdsFormConfig.name,
+        form: searchAdsFormConfig.name,
         field: {
           name: event.target.name,
           value: event.target.value

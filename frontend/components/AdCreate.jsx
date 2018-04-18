@@ -29,11 +29,10 @@ class AdCreate extends React.Component {
         value = event.target.value
       }
     }
-    console.log('change ' + typeof value)
     this.props.dispatch({
       type: actionTypes.FORM_FIELD_CHANGE,
       payload: {
-        name: adCreateFormConfig.name,
+        form: adCreateFormConfig.name,
         field: {
           name: event.target.name,
           value

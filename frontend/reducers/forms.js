@@ -27,12 +27,16 @@ const defaultState = getDefaultState(forms)
 
 export default (state = defaultState, action) => {
   let payload = action.payload
+
   switch (action.type) {
     case actionTypes.FORM_FIELD_CHANGE:
       if (state[payload.form] && state[payload.form].hasOwnProperty(payload.field.name)) {
-        state[payload.form][payload.field.name] = payload.field.value
+        let forAssign = {}
+        forAssign[payload.form] = Object.assign(state[payload.form])
+        forAssign[payload.form][payload.field.name] = payload.field.value
+
+        return Object.assign(state, forAssign)
       }
-      return state
     default:
       return state
   }

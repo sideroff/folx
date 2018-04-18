@@ -6,6 +6,7 @@ export default class Form extends React.Component {
   }
 
   render() {
+    console.log('form render ' + JSON.stringify(this.props))
     return (
       <div className="form">
         <form action='#' onSubmit={this.props.onSubmit} className={'form ' + (this.props.config.customClasses || '')}>
