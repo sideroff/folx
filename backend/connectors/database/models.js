@@ -5,7 +5,9 @@ module.exports = {
       username: {
         type: String,
         unique: true,
-        index: true
+        index: true,
+        minLength: 4,
+        maxLength: 20
       },
       email: {
         type: String,
@@ -33,8 +35,8 @@ module.exports = {
       description: {
         type: String,
         trim: true,
-        minlength: 69,
-        maxlength: 1500
+        minLength: 69,
+        maxLength: 1500
       },
       price: {
         type: Number,

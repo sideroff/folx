@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node ./backend/index.js",
     "start-w": "nodemon ./backend/index.js",
-    "heroku-postbuild": "nyc _mocha ./test/index.js || exit 0 && webpack",
+    "heroku-postbuild": "nyc _mocha ./test/index.js && webpack",
     "build": "webpack",
-    "test": "mocha ./test/index.js"
+    "test": "nyc _mocha ./test/index.js"
   },
   "author": "sideroff",
   "homepage": "https://github.com/sideroff/folx#readme",

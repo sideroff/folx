@@ -5,6 +5,7 @@ const messages = require("./../messages")
 const db = require("./../connectors/database")
 const cache = require("./../connectors/cache")
 const logger = require("./../logger")
+const userSchema = require("./../connectors/database/models").User.schema
 
 module.exports = {
   login: (params, res) => {
@@ -32,6 +33,10 @@ module.exports = {
 
       if (!params.username || typeof params.username !== "string") {
         return reject(messages.invalidUsername)
+      } else if (params.username.length < userSchema.username.minLength) {
+        return reject(messages.usernameTooShort)
+      } else if (params.username.length > userSchema.username.maxLength) {
+        return reject(messages.usernameTooLong)
       } else if (!params.password || typeof params.password !== "string") {
         return reject(messages.invalidPassword)
       } else if (params.password !== params.confirmPassword) {

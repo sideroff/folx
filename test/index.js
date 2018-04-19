@@ -36,17 +36,7 @@ describe("temporary", function () {
       done(error)
     })
   })
-
-  // runs before each test in this block
-  beforeEach(function () {
-    console.log(1)
-  })
-
-  // runs after each test in this block
-  afterEach(function () {
-    console.log(2)
-  })
-
+  
   describe('serviceProviders', () => {
     require('./serviceProviders')
   })

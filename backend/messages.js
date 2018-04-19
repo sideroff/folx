@@ -1,3 +1,5 @@
+const models = require("./connectors/database/models")
+
 module.exports = {
   friendlyError: {
     code: "friendlyError",
@@ -38,6 +40,14 @@ module.exports = {
   invalidUsername: {
     code: "invalidUsername",
     message: "The username you've entered is invalid."
+  },
+  usernameTooShort: {
+    code: "usernameTooShort",
+    message: `The username you've entered should not be shorter than ${models.User.schema.username.minlength}.`
+  },
+  usernameTooLong: {
+    code: "usernameTooLong",
+    message: `The username you've entered should not be longer than ${models.User.schema.username.maxlength}.`
   },
   invalidPassword: {
     code: "invalidPassword",
