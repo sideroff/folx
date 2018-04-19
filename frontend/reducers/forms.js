@@ -25,7 +25,7 @@ const defaultState = getDefaultState(forms)
 
 export default (state = defaultState, action) => {
   let payload = action.payload
-  window.oldState = state
+
   switch (action.type) {
     case actionTypes.FORM_FIELD_CHANGE:
       if (state[payload.form] && state[payload.form].hasOwnProperty(payload.field.name)) {

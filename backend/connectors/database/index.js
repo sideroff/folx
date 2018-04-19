@@ -39,7 +39,7 @@ module.exports = {
         initializeModels()
         logger.log("Connection to database & model initialization is successful")
 
-        // for some reason mongoose sets up some functions in the event loop
+        // for some reason mongoose sets up some functions in the event loop;
         // resolve after them so that when you later call close you dont get
         // an exception "topology was closed" when they try to access the connection
         setTimeout(() => {

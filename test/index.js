@@ -47,23 +47,8 @@ describe("temporary", function () {
     console.log(2)
   })
 
-  describe('users', () => {
-    describe('login', () => {
-      let serviceRequest = {
-        provider: "users",
-        service: "login",
-        params: {
-          username: "javata",
-          password: "javata"
-        }
-      }
-      it('should resolve', done => {
-        serviceProviders.executeService(serviceRequest).then(() => {
-          done()
-        }).catch(error => {
-          done(error)
-        })
-      })
-    })
+  describe('serviceProviders', () => {
+    require('./serviceProviders')
   })
+
 })
