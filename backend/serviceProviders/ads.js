@@ -14,12 +14,11 @@ module.exports = {
         return reject(messages.adPriceIsRequired)
       }
 
-      resolve(messages.adCreationSuccessful)
+      db.models.Ad(params).save().then(result => {
+        resolve(messages.adCreationSuccessful)
+      }).catch(error => {
+        reject(messages.databaseException)
+      })
     })
   }
 }
-
-
-
-
-

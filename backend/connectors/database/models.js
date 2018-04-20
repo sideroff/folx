@@ -19,11 +19,7 @@ module.exports = {
     }
   },
   Ad: {
-    methods: {
-      createPost: function () {
-        return this.save();
-      }
-    },
+    methods: {},
     schema: {
       title: {
         type: String,
@@ -32,24 +28,42 @@ module.exports = {
         minlength: 10,
         maxlength: 99
       },
+      address: {
+        country: {
+          type: String,
+        },
+        city: {
+          type: String
+        },
+        details: {
+          type: String
+        }
+      },
       description: {
         type: String,
         trim: true,
-        minLength: 69,
-        maxLength: 1500
+        minLength: 25,
+        maxLength: 1500,
+        required: true
       },
       price: {
         type: Number,
-        default: 0
+        required: true
       },
-      user: {
+      creator: {
         type: String,
         index: true
       },
       date: {
         type: Date,
         default: Date.now
-      }
+      },
+      contacts: [
+        {
+          type: String,
+          value: String
+        }
+      ]
     }
   }
 }
