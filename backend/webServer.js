@@ -167,7 +167,16 @@ Promise.all(promises).then(results => {
 }).catch(error => {
   logger.log(`Application ${process.pid} has encountered an error ${JSON.stringify(error)}`)
 
-  // TODO: kill all connections
+  let closePromises = []
 
-  process.kill(process.pid, 0)
+  closePromises.push(db.close())
+  closePromises.push(cache.close())
+
+  Promise.all(closePromises).then(() => {
+    logger.log("Application shut down gracefully.")
+    process.kill(process.pid, 0)
+  }).catch(error => {
+    logger.log("Application encountered a problem while shutting down. ", JSON.stringify(error))
+    process.kill(process.pid, 0)
+  })
 })
