@@ -183,6 +183,10 @@ form {
   display: table-cell;
   white-space: nowrap;
   padding-right: 2em;
+
+  .logout {
+    cursor: pointer;
+  }
 }
 
 

@@ -78,7 +78,7 @@ module.exports = {
     message: "Ad price is required."
   },
   adCreationSuccessful: {
-    code: "adPriceIsRequired",
-    message: "Ad price is required."
+    code: "adCreationSuccessful",
+    message: "The ad was created successfully."
   }
 }

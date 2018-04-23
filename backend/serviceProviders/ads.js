@@ -14,7 +14,7 @@ module.exports = {
         return reject(messages.adPriceIsRequired)
       }
 
-      db.models.Ad(params).save().then(result => {
+      new db.models.Ad(params).save().then(result => {
         resolve(messages.adCreationSuccessful)
       }).catch(error => {
         reject(messages.databaseException)

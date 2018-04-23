@@ -24,6 +24,7 @@ module.exports = {
       title: {
         type: String,
         index: true,
+        unique: true,
         trim: true,
         minlength: 10,
         maxlength: 99

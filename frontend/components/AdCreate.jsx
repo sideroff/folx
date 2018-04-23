@@ -4,16 +4,17 @@ import { withRouter } from 'react-router'
 
 import Form from './Form.jsx'
 import { adCreate as adCreateFormConfig } from './../forms'
+import ErrorMessage from './ErrorMessage.jsx'
 
 import actionTypes from './../actionTypes'
 import requestDispatcher from './../services/requestDispatcher'
 
 function mapStateToProps(state) {
   return {
-    adCreate: state.forms.adCreate
+    adCreate: state.forms.adCreate,
+    errorMessage: state.messages.adCreate.error
   }
 }
-
 
 class AdCreate extends React.Component {
   constructor(props) {
@@ -63,12 +64,15 @@ class AdCreate extends React.Component {
       this.props.history.push(nextRoute)
     }).catch(error => {
       this.props.dispatch({
-        type: actionTypes.AD_CREATE_FAILURE,
-        payload: error
+        type: actionTypes.ADD_MESSAGE,
+        payload: {
+          message: error,
+          messageType: 'error',
+          messageIndex: adCreateFormConfig.name
+        }
       })
     })
   }
-
 
   render() {
     return (
@@ -79,6 +83,8 @@ class AdCreate extends React.Component {
           onChange={this.onChange.bind(this)}
           onSubmit={this.onSubmit.bind(this)}
         />
+
+        {this.props.adCreateErrorMsg && <ErrorMessage error={this.props.adCreateErrorMsg} />}
       </div>
     )
   }

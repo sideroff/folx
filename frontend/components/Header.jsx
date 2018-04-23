@@ -64,7 +64,7 @@ class Header extends React.Component {
           </nav>
           <div className="greeting">
             <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
-            {this.props.currentUser.isLoggedIn ? <span onClick={this.logout}> Logout!</span> : ''}
+            {this.props.currentUser.isLoggedIn ? <span className='logout' onClick={this.logout}> Logout!</span> : ''}
           </div>
           <div onClick={this.closeMobileMenu} className="header-overlay"></div>
         </div>
