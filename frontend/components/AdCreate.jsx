@@ -58,7 +58,7 @@ class AdCreate extends React.Component {
       let nextRoute = '/'
 
       if (response.id) {
-        nextRoute += '/ad/' + response.id
+        nextRoute = '/ad/' + response.id
       }
 
       this.props.history.push(nextRoute)
@@ -84,7 +84,7 @@ class AdCreate extends React.Component {
           onSubmit={this.onSubmit.bind(this)}
         />
 
-        {this.props.adCreateErrorMsg && <ErrorMessage error={this.props.adCreateErrorMsg} />}
+        {this.props.errorMessage && <ErrorMessage form={adCreateFormConfig.name} error={this.props.errorMessage} />}
       </div>
     )
   }

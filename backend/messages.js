@@ -80,5 +80,13 @@ module.exports = {
   adCreationSuccessful: {
     code: "adCreationSuccessful",
     message: "The ad was created successfully."
-  }
+  },
+  adPriceMustBePositive: {
+    code: "adPriceMustBePositive",
+    message: "The ad price must be positive."
+  },
+  adDoesNotExist: {
+    code: "adDoesNotExist",
+    message: "The ad you are looking for does not exist."
+  },
 }

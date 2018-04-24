@@ -51,7 +51,7 @@ class Header extends React.Component {
           <div className="header-logo">
             <Link to='/'>
               <img className="full-size" src="/logo.png" alt="logo" />
-              <img className="mobile" src="mobile-logo.png" alt="mobile.logo" />
+              <img className="mobile" src="/mobile-logo.png" alt="mobile.logo" />
             </Link>
           </div>
           <nav className="header-nav">
