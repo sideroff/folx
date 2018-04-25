@@ -70,9 +70,9 @@ module.exports = {
     submitButtonLabel: 'Create',
     fields: [
       {
-        name: 'name',
+        name: 'title',
         type: 'text',
-        placeholder: 'Name'
+        placeholder: 'Title'
       }, {
         name: 'description',
         type: 'textarea',

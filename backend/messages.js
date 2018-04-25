@@ -61,9 +61,9 @@ module.exports = {
     code: "registrationSuccessful",
     message: "You have registered successfully."
   },
-  adNameIsRequired: {
-    code: "adNameIsRequired",
-    message: "Ad name is required."
+  adTitleIsRequired: {
+    code: "adTitleIsRequired",
+    message: "Ad title is required."
   },
   duplicateAdName: {
     code: "duplicateAdName",

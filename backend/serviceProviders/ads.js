@@ -14,8 +14,8 @@ module.exports = {
         }
       }
 
-      if (typeof params.name !== "string" || params.name.length === 0) {
-        return reject(messages.adNameIsRequired)
+      if (typeof params.title !== "string" || params.title.length === 0) {
+        return reject(messages.adTitleIsRequired)
       } else if (typeof params.description !== "string" || params.description.length === 0) {
         return reject(messages.adDescriptionIsRequired)
       } else if (typeof params.price !== "number") {
@@ -28,6 +28,11 @@ module.exports = {
         let message = Object.assign({}, messages.adCreationSuccessful, { id: result.id })
         resolve(message)
       }).catch(error => {
+        // foreach field in schema
+        // if error.errors[field]
+        // let err = error.errors[field]
+        // let correctRrror = messages['ad' + err.path.capitalize() + err.kind.capitalize()]
+        // reject(correctRrror)
         reject(messages.databaseException)
       })
     })
