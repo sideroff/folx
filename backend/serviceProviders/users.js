@@ -31,6 +31,7 @@ module.exports = {
   register: (params, res) => {
     return new Promise((resolve, reject) => {
 
+      
       if (!params.username || typeof params.username !== "string") {
         return reject(messages.invalidUsername)
       } else if (!params.password || typeof params.password !== "string") {

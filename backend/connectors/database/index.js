@@ -3,45 +3,48 @@ const mongoose = require("mongoose")
 const config = require("./../../../config")
 const configModels = require("./models")
 const logger = require("./../../logger")
+const utils = require("./../../utils")
 const messages = require("./../../messages")
 
 let connection
 let models = {}
+
+function mongoosePostSaveMiddleware(error, doc, next) {
+  if (!error) {
+    return next()
+  }
+
+  let exception = messages.databaseException
+
+  if (error.code === 11000) {
+    let parsedMessage = utils.parseMongooseErrorMessage(error.message)
+    if (parsedMessage) {
+      let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(parsedMessage.field)
+      let correctException = messages[exceptionCode]
+      if (correctException) {
+        exception = correctException
+      }
+    }
+  } else if (error.name === "ValidationError") {
+    exception = Object.assign({}, messages.validationError)
+    let err
+    for (let field in error.errors) {
+      err = error.errors[field]
+      if (messages[err.message]) {
+        exception.details.push(messages[err.message])
+      }
+    }
+  }
+
+  next(exception)
+}
 
 function initializeModels() {
   for (let modelName in configModels) {
     //if (!configModels.hasOwnProperty(modelName)) { continue }
 
     let schema = new mongoose.Schema(configModels[modelName].schema)
-    schema.post('save', function (error, doc, next) {
-      if (!error) {
-        return next()
-      }
-
-      let exception = messages.databaseException
-
-      if (error.code === 11000) {
-        let parsedMessage = utils.parseMongooseErrorMessage(error.message)
-        if (parsedMessage) {
-          let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(parsedMessage.field)
-          let correctException = messages[exceptionCode]
-          if (correctException) {
-            exception = correctException
-          }
-        }
-      } else if (error.name === "ValidationError") {
-        exception = Object.assign({}, messages.validationError)
-        let err
-        for (let field in error.errors) {
-          err = error.errors[field]
-          if (messages[err.message]) {
-            exception.details.push(messages[err.message])
-          }
-        }
-      }
-
-      next(exception)
-    })
+    schema.post('save', mongoosePostSaveMiddleware)
 
     let methods = configModels[modelName].methods || {}
     for (let methodName in methods) {

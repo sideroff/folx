@@ -35,5 +35,8 @@ module.exports = {
     prefixes: {
       token: "t:"
     }
+  },
+  tests: {
+    timeout: 0
   }
 }

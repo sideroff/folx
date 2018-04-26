@@ -1,3 +1,6 @@
+
+const config = require("./../config")
+
 // https://github.com/istanbuljs/nyc
 
 // tests will be run by heroku using the postbuild hook they provide (check package.json > scripts),
@@ -6,7 +9,7 @@ var assert = require('assert')
 
 describe("temporary", function () {
   //allowed time for each test
-  this.timeout(5000)
+  this.timeout(config.tests.timeout)
   let serviceProviders
 
   // runs before all tests in this block

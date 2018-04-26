@@ -137,7 +137,7 @@ describe("register", () => {
 
   it(`should reject with username too short when username is less than ${userSchema.username.minLength} chars long`, done => {
     serviceCall.params = testUserData
-    serviceCall.params.username = "a".repeat(userSchema.username.minLength - 1)
+    serviceCall.params.username = "a".repeat(userSchema.username.minLength[0] - 1)
 
     serviceProviders.executeService(serviceCall).then(result => {
       done(new Error("Username is not validated for minimum character requirements."))
@@ -166,7 +166,7 @@ describe("register", () => {
   })
 
   it('should reject with duplicate username if username is already taken', done => {
-    testUserData.email = 'a'.repeat(userSchema.email.minLength || 0 + 1)
+    testUserData.username = 'a'.repeat(userSchema.username.minLength[0] + 1)
     serviceCall.params = testUserData
 
     serviceProviders.executeService(serviceCall).then(result => {
