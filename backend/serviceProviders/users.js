@@ -33,10 +33,6 @@ module.exports = {
 
       if (!params.username || typeof params.username !== "string") {
         return reject(messages.invalidUsername)
-      } else if (params.username.length < userSchema.username.minLength) {
-        return reject(messages.usernameTooShort)
-      } else if (params.username.length > userSchema.username.maxLength) {
-        return reject(messages.usernameTooLong)
       } else if (!params.password || typeof params.password !== "string") {
         return reject(messages.invalidPassword)
       } else if (params.password !== params.confirmPassword) {
@@ -49,20 +45,7 @@ module.exports = {
       new db.models.User(params).save().then(result => {
         resolve(messages.registrationSuccessful)
       }).catch(error => {
-        let exception = messages.databaseException
-
-        if (error.code === 11000) {
-          let parsedMessage = utils.parseMongooseErrorMessage(error.message)
-          if (parsedMessage) {
-            let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(parsedMessage.field)
-            let correctException = messages[exceptionCode]
-            if (correctException) {
-              exception = correctException
-            }
-          }
-        }
-
-        reject(exception)
+        reject(error)
       })
     })
   }

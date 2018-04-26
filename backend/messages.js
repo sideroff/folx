@@ -89,4 +89,17 @@ module.exports = {
     code: "adDoesNotExist",
     message: "The ad you are looking for does not exist."
   },
+  validationError: {
+    code: "validationError",
+    message: "",
+    details: []
+  },
+  adTitleTooShort: {
+    code: "adTitleTooShort",
+    message: `The title you've entered should not be shorter than ${models.Ad.schema.title.minLength}`,
+  },
+  adTitleTooLong: {
+    code: "adTitleTooLong",
+    message: `The title you've entered should not be shorter than ${models.Ad.schema.title.minLength}`,
+  }
 }

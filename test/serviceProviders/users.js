@@ -39,7 +39,7 @@ describe("register", () => {
 
   it("should save user to database when data is correct", done => {
     serviceCall.params = testUserData
-    
+
     serviceProviders.executeService(serviceCall).then(result => {
       return db.models.User.findOne({ username: testUserData.username })
     }).then(entity => {
@@ -151,7 +151,9 @@ describe("register", () => {
 
   it(`should reject with username too long when username is more than ${userSchema.username.maxLength} chars long`, done => {
     serviceCall.params = testUserData
-    serviceCall.params.username = "a".repeat(userSchema.username.maxLength + 1)
+    let times = userSchema.username.maxLength[0] + 1
+    serviceCall.params.username = "a".repeat(times)
+    console.log('here ' + times)
 
     serviceProviders.executeService(serviceCall).then(result => {
       return done(new Error("Username is not validated for maximum character requirements."))
@@ -178,7 +180,7 @@ describe("register", () => {
   })
 
   it('should reject with duplicate email if email is already taken', done => {
-    testUserData.username = 'a'.repeat(userSchema.username.minLength || 0 + 1)
+    testUserData.username = 'a'.repeat(userSchema.username.minLength[0] + 1)
     serviceCall.params = testUserData
 
     serviceProviders.executeService(serviceCall).then(result => {

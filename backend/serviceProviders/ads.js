@@ -1,7 +1,7 @@
 const messages = require("./../messages")
 const db = require("./../connectors/database")
 const logger = require("./../logger")
-
+const adSchema = require("./../connectors/database/models").Ad.schema
 
 
 module.exports = {
@@ -28,12 +28,7 @@ module.exports = {
         let message = Object.assign({}, messages.adCreationSuccessful, { id: result.id })
         resolve(message)
       }).catch(error => {
-        // foreach field in schema
-        // if error.errors[field]
-        // let err = error.errors[field]
-        // let correctRrror = messages['ad' + err.path.capitalize() + err.kind.capitalize()]
-        // reject(correctRrror)
-        reject(messages.databaseException)
+        reject(error)
       })
     })
   },

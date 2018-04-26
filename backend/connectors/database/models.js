@@ -6,8 +6,8 @@ module.exports = {
         type: String,
         unique: true,
         index: true,
-        minLength: 4,
-        maxLength: 20
+        minLength: [4, "usernameTooShort"],
+        maxLength: [20, "usernameTooLong"]
       },
       email: {
         type: String,
@@ -26,8 +26,9 @@ module.exports = {
         index: true,
         unique: true,
         trim: true,
-        minlength: 10,
-        maxlength: 99
+        required: [true, "adTitleIsRequired"],
+        minlength: [10, "adTitleTooShort"],
+        maxlength: [99, "adTitleTooLong"]
       },
       address: {
         country: {
@@ -43,13 +44,14 @@ module.exports = {
       description: {
         type: String,
         trim: true,
-        minLength: 25,
-        maxLength: 1500,
-        required: true
+        minLength: [25, "adDescriptionTooShort"],
+        maxLength: [1500, "adDescriptionTooLong"],
+        required: [true, "adDescriptionIsRequired"],
       },
       price: {
         type: Number,
-        required: true
+        min: [0, "adPriceMustBePositive"],
+        required: [true, "adPriceIsRequired"],
       },
       creator: {
         type: String,

@@ -5,6 +5,7 @@
 var assert = require('assert')
 
 describe("temporary", function () {
+  //allowed time for each test
   this.timeout(5000)
   let serviceProviders
 
