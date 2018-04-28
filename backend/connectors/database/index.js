@@ -19,7 +19,7 @@ function mongoosePostSaveMiddleware(error, doc, next) {
   if (error.code === 11000) {
     let parsedMessage = utils.parseMongooseErrorMessage(error.message)
     if (parsedMessage) {
-      let exceptionCode = "duplicateUser" + utils.capitalizeFirstLetter(parsedMessage.field)
+      let exceptionCode = "duplicate" + utils.capitalizeFirstLetter(parsedMessage.table.substring(0, parsedMessage.table.length - 2) + utils.capitalizeFirstLetter(parsedMessage.field)
       let correctException = messages[exceptionCode]
       if (correctException) {
         exception = correctException

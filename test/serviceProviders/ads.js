@@ -11,7 +11,7 @@ const defaultRegisterServiceCall = {
 }
 
 const defaultTestAdData = {
-  name: "testAdName",
+  title: "testAdName",
   description: "testAdDescription",
   price: 420
 }
@@ -29,6 +29,8 @@ describe('create', () => {
     serviceCall.params = testAdData
     serviceProviders.executeService(serviceCall).then(result => {
       done()
-    }).catch(error => done)
+    }).catch(error => {
+      done(error)
+    })
   })
 })

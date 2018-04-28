@@ -6,8 +6,8 @@ module.exports = {
         type: String,
         unique: true,
         index: true,
-        minLength: [4, "usernameTooShort"],
-        maxLength: [20, "usernameTooLong"]
+        minlength: [4, "usernameTooShort"],
+        maxlength: [20, "usernameTooLong"]
       },
       email: {
         type: String,
@@ -44,8 +44,8 @@ module.exports = {
       description: {
         type: String,
         trim: true,
-        minLength: [25, "adDescriptionTooShort"],
-        maxLength: [1500, "adDescriptionTooLong"],
+        minlength: [10, "adDescriptionTooShort"],
+        maxlength: [1500, "adDescriptionTooLong"],
         required: [true, "adDescriptionIsRequired"],
       },
       price: {

@@ -69,5 +69,8 @@ module.exports = {
   },
   capitalizeFirstLetter: (str) => {
     return typeof str === "string" ? str.charAt(0).toUpperCase() + str.slice(1) : ""
+  },
+  getRandomInteger: (min, max) => {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }

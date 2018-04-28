@@ -1,9 +1,13 @@
 const assert = require("assert")
+const crypto = require("crypto")
+
 const serviceProviders = require("./../../backend/serviceProviders")
 const logger = require("./../../backend/logger")
+const utils = require("./../../backend/utils")
 const userSchema = require("./../../backend/connectors/database/models").User.schema
 const messages = require("./../../backend/messages")
 const db = require("./../../backend/connectors/database")
+
 
 const defaultRegisterServiceRequest = {
   provider: "users",
@@ -16,6 +20,15 @@ const defaultTestUserData = {
   password: "testPassword",
   confirmPassword: "testPassword",
   email: "testMail@gmail.com"
+}
+
+function getRandomValidUser() {
+  let user = Object.assign({}, defaultTestUserData)
+
+  user.username = crypto.randomBytes(32).toString("hex").substring(0, utils.getRandomInteger(userSchema.username.minlength[0], userSchema.username.maxlength[0]))
+  user.email = crypto.randomBytes(32).toString("hex").substring(0, utils.getRandomInteger(4, 20))
+
+  return user
 }
 
 describe("register", () => {
@@ -38,10 +51,10 @@ describe("register", () => {
   })
 
   it("should save user to database when data is correct", done => {
-    serviceCall.params = testUserData
+    serviceCall.params = getRandomValidUser()
 
     serviceProviders.executeService(serviceCall).then(result => {
-      return db.models.User.findOne({ username: testUserData.username })
+      return db.models.User.findOne({ username: serviceCall.params.username })
     }).then(entity => {
       if (entity) {
         return done()
@@ -135,38 +148,46 @@ describe("register", () => {
     })
   })
 
-  it(`should reject with username too short when username is less than ${userSchema.username.minLength} chars long`, done => {
+  it(`should reject with username too short when username is less than ${userSchema.username.minlength[0]} chars long`, done => {
     serviceCall.params = testUserData
-    serviceCall.params.username = "a".repeat(userSchema.username.minLength[0] - 1)
+    serviceCall.params.username = "a".repeat(userSchema.username.minlength[0] - 1)
 
     serviceProviders.executeService(serviceCall).then(result => {
       done(new Error("Username is not validated for minimum character requirements."))
     }).catch(error => {
-      if (error === messages.usernameTooShort) {
+      if (error &&
+        error.code &&
+        messages[error.code] === messages.validationError &&
+        error.details &&
+        error.details.some(e => e === messages.usernameTooShort)) {
         return done()
       }
-      done(new Error(`The register service did not respond with the usernameTooShort message when username was below ${userSchema.username.minLength} characters long`))
+      done(new Error(`The register service did not respond with the usernameTooShort message when username was below ${userSchema.username.minlength[0]} characters long`))
     })
   })
 
-  it(`should reject with username too long when username is more than ${userSchema.username.maxLength} chars long`, done => {
+  it(`should reject with username too long when username is more than ${userSchema.username.maxlength[0]} chars long`, done => {
     serviceCall.params = testUserData
-    let times = userSchema.username.maxLength[0] + 1
+    let times = userSchema.username.maxlength[0] + 1
     serviceCall.params.username = "a".repeat(times)
     console.log('here ' + times)
 
     serviceProviders.executeService(serviceCall).then(result => {
       return done(new Error("Username is not validated for maximum character requirements."))
     }).catch(error => {
-      if (error === messages.usernameTooLong) {
+      if (error &&
+        error.code &&
+        messages[error.code] === messages.validationError &&
+        error.details &&
+        error.details.some(e => e === messages.usernameTooLong)) {
         return done()
       }
-      done(new Error(`The register service did not respond with the usernameTooLong message when username was above ${userSchema.username.maxLength} characters long`))
+      done(new Error(`The register service did not respond with the usernameTooLong message when username was above ${userSchema.username.maxlength[0]} characters long`))
     })
   })
 
   it('should reject with duplicate username if username is already taken', done => {
-    testUserData.username = 'a'.repeat(userSchema.username.minLength[0] + 1)
+    testUserData.username = 'a'.repeat(userSchema.username.minlength[0] + 1)
     serviceCall.params = testUserData
 
     serviceProviders.executeService(serviceCall).then(result => {
@@ -180,7 +201,7 @@ describe("register", () => {
   })
 
   it('should reject with duplicate email if email is already taken', done => {
-    testUserData.username = 'a'.repeat(userSchema.username.minLength[0] + 1)
+    testUserData.username = 'b'.repeat(userSchema.username.minlength[0] + 1)
     serviceCall.params = testUserData
 
     serviceProviders.executeService(serviceCall).then(result => {
