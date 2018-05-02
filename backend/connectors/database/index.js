@@ -19,7 +19,7 @@ function mongoosePostSaveMiddleware(error, doc, next) {
   if (error.code === 11000) {
     let parsedMessage = utils.parseMongooseErrorMessage(error.message)
     if (parsedMessage) {
-      let exceptionCode = "duplicate" + utils.capitalizeFirstLetter(parsedMessage.table.substring(0, parsedMessage.table.length - 2) + utils.capitalizeFirstLetter(parsedMessage.field)
+      let exceptionCode = "duplicate" + utils.capitalizeFirstLetter(parsedMessage.table.substring(0, parsedMessage.table.length - 1) + utils.capitalizeFirstLetter(parsedMessage.field))
       let correctException = messages[exceptionCode]
       if (correctException) {
         exception = correctException
@@ -85,6 +85,23 @@ module.exports = {
       })
     })
 
+  },
+  clear: () => {
+    return new Promise((resolve, reject) => {
+      let promises = []
+
+      for (let key in models) {
+        promises.push(models[key].remove({}))
+      }
+
+      Promise.all(promises).then(results => {
+        logger.log("Database has been cleared.")
+        resolve()
+      }).catch(error => {
+        logger.log("Database could not be cleared.")
+        reject(error)
+      })
+    })
   },
   close: () => {
     return new Promise((resolve, reject) => {

@@ -24,8 +24,7 @@ describe('create', () => {
     serviceCall = Object.assign({}, defaultRegisterServiceCall)
     testAdData = Object.assign({}, defaultTestAdData)
   })
-
-  it('should resolve', done => {
+  it('should resolve when ad data is valud', done => {
     serviceCall.params = testAdData
     serviceProviders.executeService(serviceCall).then(result => {
       done()

@@ -21,6 +21,10 @@ describe("temporary", function () {
 
     Promise.all(promises).then(results => {
       serviceProviders = require("./../backend/serviceProviders")
+
+      //ensure empty database
+      return require("./../backend/connectors/database").clear()
+    }).then(() => {
       done()
     }).catch(error => {
       done(error)
@@ -40,7 +44,7 @@ describe("temporary", function () {
       done(error)
     })
   })
-  
+
   describe('serviceProviders', () => {
     require('./serviceProviders')
   })
