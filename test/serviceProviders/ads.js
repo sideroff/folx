@@ -2,8 +2,6 @@ const assert = require('assert')
 
 const serviceProviders = require("./../../backend/serviceProviders")
 
-
-
 const defaultRegisterServiceCall = {
   provider: "ads",
   service: "create",

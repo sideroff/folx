@@ -1,6 +1,9 @@
 
 const config = require("./../config")
+const logger = require("./../backend/logger")
 
+const cache = require("./../backend/connectors/cache")
+const db = require("./../backend/connectors/database")
 // https://github.com/istanbuljs/nyc
 
 // tests will be run by heroku using the postbuild hook they provide (check package.json > scripts),
@@ -16,14 +19,14 @@ describe("temporary", function () {
   before(done => {
     let promises = []
 
-    promises.push(require("./../backend/connectors/cache").initialize())
-    promises.push(require("./../backend/connectors/database").initialize())
+    promises.push(cache.initialize())
+    promises.push(db.initialize())
 
     Promise.all(promises).then(results => {
       serviceProviders = require("./../backend/serviceProviders")
 
       //ensure empty database
-      return require("./../backend/connectors/database").clear()
+      return db.clear()
     }).then(() => {
       done()
     }).catch(error => {
@@ -35,18 +38,21 @@ describe("temporary", function () {
   after(function (done) {
     let promises = []
 
-    promises.push(require("./../backend/connectors/cache").close())
-    promises.push(require("./../backend/connectors/database").close())
+    db.clear().then(() => {
+      promises.push(cache.close())
+      promises.push(db.close())
 
-    Promise.all(promises).then(results => {
-      done()
+      Promise.all(promises).then(results => {
+        done()
+      }).catch(error => {
+        done(error)
+      })
     }).catch(error => {
-      done(error)
+      logger.log(JSON.stringify(error))
     })
   })
 
   describe('serviceProviders', () => {
     require('./serviceProviders')
   })
-
 })
