@@ -14,6 +14,10 @@ module.exports = {
         unique: true,
         index: true
       },
+      createdOn: {
+        type: Date,
+        default: Date.now
+      },
       passwordHash: String,
       salt: String
     }
@@ -57,7 +61,7 @@ module.exports = {
         type: String,
         index: true
       },
-      date: {
+      createdOn: {
         type: Date,
         default: Date.now
       },

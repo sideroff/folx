@@ -4,6 +4,8 @@ const defaultState = {
   isMobileMenuActive: false,
   onAuthRedirect: '/',
   isLoadingAd: false,
+  adGetSkip: 0,
+  adGetLimit: 20
 }
 
 export default (state = defaultState, action) => {
@@ -14,6 +16,10 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, { onAuthRedirect: action.payload })
     case actionTypes.CHANGE_IS_LOADING_AD:
       return Object.assign({}, state, { isLoadingAd: action.payload })
+    case actionTypes.UPDATE_CARD_GET_SKIP:
+      return Object.assign({}, state, { cardGetSkip: action.payload })
+    case actionTypes.REMOVE_SAVED_ADS:
+      return Object.assign({}, state, { cardGetSkip: 0 })
     default:
       return state
   }

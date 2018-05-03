@@ -10,7 +10,10 @@ export default class Cards extends React.Component {
   render() {
     return (
       <div className="card-grid">
-        {this.props.ads.map((a, i) => <Card key={i} />)}
+        {this.props.areCardsLoading
+          ? Array.apply(null, Array(this.props.ads)).map(i => <Card key={i} isCardLoading={true} eb={i} />)
+          : this.props.ads.map((a, i) => <Card key={a._id} values={a} eb={i} />)}
+        {}
       </div>
     )
   }

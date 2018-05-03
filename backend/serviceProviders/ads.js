@@ -1,6 +1,7 @@
 const messages = require("./../messages")
 const db = require("./../connectors/database")
 const logger = require("./../logger")
+const config = require("./../../config")
 const adSchema = require("./../connectors/database/models").Ad.schema
 
 
@@ -41,6 +42,17 @@ module.exports = {
         resolve(result)
       }).catch(error => {
         reject(error)
+      })
+    })
+  },
+  get: (params, res) => {
+    return new Promise((resolve, reject) => {
+      db.models.Ad.find().limit(params.limis || config.database.defaultAdsLimit).skip(params.skip || 0).then(results => {
+        logger.log('ads get ' + JSON.stringify(params) + ' ' + JSON.stringify(results))
+        resolve(results)
+      }).catch(error => {
+        logger.log('ads get err ' + JSON.stringify(error))
+        reject(messages.databaseException)
       })
     })
   }

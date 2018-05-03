@@ -43,11 +43,11 @@ module.exports = {
   },
   usernameTooShort: {
     code: "usernameTooShort",
-    message: `The username you've entered should not be shorter than ${models.User.schema.username.minlength}.`
+    message: `The username should not be shorter than ${models.User.schema.username.minlength[0]} characters.`
   },
   usernameTooLong: {
     code: "usernameTooLong",
-    message: `The username you've entered should not be longer than ${models.User.schema.username.maxlength}.`
+    message: `The username should not be longer than ${models.User.schema.username.maxlength[0]} characters.`
   },
   invalidPassword: {
     code: "invalidPassword",
@@ -65,12 +65,8 @@ module.exports = {
     code: "adTitleIsRequired",
     message: "Ad title is required."
   },
-  duplicateAdName: {
-    code: "duplicateAdName",
-    message: "Ad name is already used, please choose another."
-  },
   adDescriptionIsRequired: {
-    code: "AdDescriptionIsRequired",
+    code: "adDescriptionIsRequired",
     message: "Ad description is required."
   },
   adPriceIsRequired: {
@@ -96,10 +92,18 @@ module.exports = {
   },
   adTitleTooShort: {
     code: "adTitleTooShort",
-    message: `The title you've entered should not be shorter than ${models.Ad.schema.title.minLength}`,
+    message: `The ad title should not be shorter than ${models.Ad.schema.title.minlength[0]} characters`,
   },
   adTitleTooLong: {
     code: "adTitleTooLong",
-    message: `The title you've entered should not be shorter than ${models.Ad.schema.title.minLength}`,
-  }
+    message: `The ad title should not be shorter than ${models.Ad.schema.title.minlength[0]} characters`,
+  },
+  adDescriptionTooShort: {
+    code: "adDescriptionTooShort",
+    message: `The ad description should not be shorter than ${models.Ad.schema.description.minlength[0]} characters.`
+  },
+  adDescriptionTooLong: {
+    code: "adDescriptionTooLong",
+    message: `The ad description should not be longer than ${models.Ad.schema.description.maxlength[0]} characters.`
+  },
 }

@@ -27,6 +27,8 @@ function mongoosePostSaveMiddleware(error, doc, next) {
     }
   } else if (error.name === "ValidationError") {
     exception = Object.assign({}, messages.validationError)
+    exception.details = []
+
     let err
     for (let field in error.errors) {
       err = error.errors[field]

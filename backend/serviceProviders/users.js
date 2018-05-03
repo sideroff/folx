@@ -17,7 +17,11 @@ module.exports = {
         let userData = { username: user.username, email: user.email }
         let token = uuid()
         cache.setSession(token, userData).then(() => {
-          resolve(Object.assign(userData, { token }))
+          let expireDate = new Date(Date.now() + config.webServer.cookieLifetimeInMs).toUTCString()
+
+          res.setHeader("Set-Cookie", `token=${token}; Expires=${expireDate}; HttpOnly`)
+
+          resolve(Object.assign(userData, { token, expiresOn: expireDate }))
         }).catch(error => {
           logger.log(`An error occured while saving a user session: ${JSON.stringify(error)}`)
           return reject(messages.serverError)
@@ -31,7 +35,7 @@ module.exports = {
   register: (params, res) => {
     return new Promise((resolve, reject) => {
 
-      
+
       if (!params.username || typeof params.username !== "string") {
         return reject(messages.invalidUsername)
       } else if (!params.password || typeof params.password !== "string") {

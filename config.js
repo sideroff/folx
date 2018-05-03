@@ -17,14 +17,16 @@ module.exports = {
       ".woff": "application/font-woff",
       ".woff2": "application/font-woff2"
     },
-    passwordSaltLength: 64
+    passwordSaltLength: 64,
+    cookieLifetimeInMs: 100000
   },
   database: {
     connectionString: "mongodb://folx-dev-user:f0181546-f957-4ea6-bc05-b91597ee4209@ds113799.mlab.com:13799/folx-dev",
     name: "folx-dev",
     port: "13799",
     username: "folx-dev-user",
-    password: "f0181546-f957-4ea6-bc05-b91597ee4209"
+    password: "f0181546-f957-4ea6-bc05-b91597ee4209",
+    defaultAdsLimit: 10
   },
   cache: {
     connectionParams: {
