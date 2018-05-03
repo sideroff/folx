@@ -16,6 +16,7 @@ let currentUser = getDefaultCurrentUser()
 
 try {
   let localStorageCurrentUser = localStorage.getItem(currentUserKey)
+
   if (localStorageCurrentUser) {
     localStorageCurrentUser = JSON.parse(localStorageCurrentUser)
     currentUser = localStorageCurrentUser

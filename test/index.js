@@ -24,10 +24,7 @@ describe("temporary", function () {
 
     Promise.all(promises).then(results => {
       serviceProviders = require("./../backend/serviceProviders")
-
-      //ensure empty database
-      return db.clear()
-    }).then(() => {
+      
       done()
     }).catch(error => {
       done(error)
@@ -38,17 +35,13 @@ describe("temporary", function () {
   after(function (done) {
     let promises = []
 
-    db.clear().then(() => {
-      promises.push(cache.close())
-      promises.push(db.close())
+    promises.push(cache.close())
+    promises.push(db.close())
 
-      Promise.all(promises).then(results => {
-        done()
-      }).catch(error => {
-        done(error)
-      })
+    Promise.all(promises).then(results => {
+      done()
     }).catch(error => {
-      logger.log(JSON.stringify(error))
+      done(error)
     })
   })
 

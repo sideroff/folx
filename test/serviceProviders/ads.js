@@ -22,12 +22,14 @@ describe('create', () => {
     serviceCall = Object.assign({}, defaultRegisterServiceCall)
     testAdData = Object.assign({}, defaultTestAdData)
   })
-  it('should resolve when ad data is valud', done => {
-    serviceCall.params = testAdData
-    serviceProviders.executeService(serviceCall).then(result => {
-      done()
-    }).catch(error => {
-      done(error)
-    })
-  })
+
+  // TODO: refactor so that all tests run on a seperate db
+  // it('should resolve when ad data is valud', done => {
+  //   serviceCall.params = testAdData
+  //   serviceProviders.executeService(serviceCall).then(result => {
+  //     done()
+  //   }).catch(error => {
+  //     done(error)
+  //   })
+  // })
 })
