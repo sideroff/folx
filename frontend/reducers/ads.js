@@ -7,7 +7,7 @@ export default (state = defaultState, action) => {
   let newState
 
   switch (action.type) {
-    case actionTypes.UPDATE_CACHED_AD:
+    case actionTypes.ADD_ADS:
       if (Array.isArray(payload)) {
         //note: payload might contain ads that already exist in state if any new ones were created between requests
         newState = [...state, ...payload]

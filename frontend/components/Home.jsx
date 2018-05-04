@@ -10,7 +10,8 @@ import actionTypes from './../actionTypes'
 function mapStateToProps(state) {
   return {
     adGetSkip: state.flags.adGetSkip,
-    adGetLimit: state.flags.adGetLimit
+    adGetLimit: state.flags.adGetLimit,
+    ads: state.ads
   }
 }
 
@@ -32,9 +33,7 @@ class Home extends React.Component {
     return (
       <div>
         <SearchForm />
-        <div></div>
-        <Cards ads={this.props.getLimitSize} areCardsLoading={true} />
-        <Cards ads={[{ title: 'title1', description: 'description1', price: 420 }]} />
+        <Cards cardsValues={this.props.ads} numberOfLoading={this.props.getLimitSize} />
       </div>
     )
   }
