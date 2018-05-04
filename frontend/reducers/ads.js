@@ -15,6 +15,8 @@ export default (state = defaultState, action) => {
         newState = [...state, payload]
       }
       return newState
+    case actionTypes.REMOVE_ADS:
+      return []
     default:
       return state
   }

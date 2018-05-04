@@ -18,7 +18,7 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, { isLoadingAd: action.payload })
     case actionTypes.UPDATE_CARD_GET_SKIP:
       return Object.assign({}, state, { cardGetSkip: action.payload })
-    case actionTypes.REMOVE_SAVED_ADS:
+    case actionTypes.REMOVE_ADS:
       return Object.assign({}, state, { cardGetSkip: 0 })
     default:
       return state

@@ -29,6 +29,10 @@ class Home extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    this.props.dispatch({ type: actionTypes.REMOVE_ADS })
+  }
+
   render() {
     return (
       <div>
