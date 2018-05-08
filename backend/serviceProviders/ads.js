@@ -48,10 +48,11 @@ module.exports = {
   get: (params, res) => {
     return new Promise((resolve, reject) => {
       db.models.Ad.find().limit(params.limis || config.database.defaultAdsLimit).skip(params.skip || 0).then(results => {
-        logger.log('ads get ' + JSON.stringify(params) + ' ' + JSON.stringify(results))
-        resolve(results)
+        //artificial delay for testing purposes
+        setTimeout(() => {
+          resolve(results)
+        }, 2000)
       }).catch(error => {
-        logger.log('ads get err ' + JSON.stringify(error))
         reject(messages.databaseException)
       })
     })

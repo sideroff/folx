@@ -106,6 +106,13 @@ main {
       }
     }
 
+    .card-title {
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+
     .card-description {
       margin: 0.4em 0.6em 0.6em 0.6em;
     }

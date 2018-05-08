@@ -4,8 +4,8 @@ const defaultState = null
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.UPDATE_CURRENT_AD:
-      return action.payload || defaultState
+    case actionTypes.GET_ADD_BY_ID_RESPONSE:
+      return action.payload || {}
     default:
       return state
   }

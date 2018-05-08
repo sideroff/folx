@@ -11,6 +11,7 @@ function mapStateToProps(state) {
   return {
     adGetSkip: state.flags.adGetSkip,
     adGetLimit: state.flags.adGetLimit,
+    numberOfLoadingAds: state.flags.numberOfLoadingAds,
     ads: state.ads
   }
 }
@@ -22,6 +23,7 @@ class Home extends React.Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({ type: actionTypes.FETCHING_ADS, payload: this.props.adGetLimit })
     requestDispatcher.requestToServer('ads.get', { limit: this.props.cardGetLimit, skip: this.props.cardGetSkip }).then(results => {
       this.props.dispatch({ type: actionTypes.ADD_ADS, payload: results || [] })
     }).catch(error => {
@@ -37,7 +39,7 @@ class Home extends React.Component {
     return (
       <div>
         <SearchForm />
-        <Cards cardsValues={this.props.ads} numberOfLoading={this.props.getLimitSize} />
+        <Cards cardsValues={this.props.ads} numberOfLoading={this.props.numberOfLoadingAds} />
       </div>
     )
   }

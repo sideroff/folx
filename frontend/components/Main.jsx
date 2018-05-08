@@ -8,6 +8,7 @@ import AdCreate from "./AdCreate.jsx"
 import Ad from "./Ad.jsx"
 import NotFound from "./NotFound.jsx"
 import RequireAuth from './RequireAuth.jsx'
+import About from './About.jsx'
 
 
 export default class Main extends React.Component {
@@ -25,6 +26,7 @@ export default class Main extends React.Component {
           <Route exact path="/ad/:id" component={Ad} />
           <Route exact path="/login" component={Authentication} />
           <Route exact path="/register" component={Authentication} />
+          <Route exact path="/about" component={About} />
           <Route component={NotFound} />
         </Switch>
       </main>

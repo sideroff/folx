@@ -5,7 +5,8 @@ const defaultState = {
   onAuthRedirect: '/',
   isLoadingAd: false,
   adGetSkip: 0,
-  adGetLimit: 20
+  adGetLimit: 20,
+  numberOfLoadingAds: 0,
 }
 
 export default (state = defaultState, action) => {
@@ -20,6 +21,10 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, { cardGetSkip: action.payload })
     case actionTypes.REMOVE_ADS:
       return Object.assign({}, state, { cardGetSkip: 0 })
+    case actionTypes.FETCHING_ADS:
+      return Object.assign({}, state, { numberOfLoadingAds: action.payload })
+    case actionTypes.ADD_ADS:
+      return Object.assign({}, state, { numberOfLoadingAds: 0 })
     default:
       return state
   }

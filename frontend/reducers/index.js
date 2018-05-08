@@ -5,6 +5,8 @@ import flags from './flags'
 import forms from './forms'
 import messages from './messages'
 import ads from './ads'
+import currentAd from './currentAd'
+
 
 
 export default combineReducers({
@@ -13,4 +15,5 @@ export default combineReducers({
   forms,
   messages,
   ads,
+  currentAd,
 })

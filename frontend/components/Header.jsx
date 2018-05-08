@@ -58,7 +58,6 @@ class Header extends React.Component {
             <div onClick={this.closeMobileMenu}>
               <Link to='/profile'>Profile</Link>
               <Link to='/ad-create'>New Ad</Link>
-              <Link to='/ads'>Posts</Link>
               <Link to='/about'>About</Link>
             </div>
           </nav>
