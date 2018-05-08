@@ -29,7 +29,10 @@ class AdCreate extends React.Component {
       } catch (error) {
         value = event.target.value
       }
+    } else if (event.target.type === 'file') {
+      console.log('ayy lmao')
     }
+
     this.props.dispatch({
       type: actionTypes.FORM_FIELD_CHANGE,
       payload: {

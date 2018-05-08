@@ -68,6 +68,7 @@ module.exports = {
   adCreate: {
     name: 'adCreate',
     submitButtonLabel: 'Create',
+    useFormDataObject: true,
     fields: [
       {
         name: 'title',
@@ -81,6 +82,11 @@ module.exports = {
         name: 'price',
         type: 'number',
         placeholder: 'Price'
+      },
+      {
+        name: 'picture',
+        type: 'file',
+        placeholder: 'Picture'
       }
     ]
   }
