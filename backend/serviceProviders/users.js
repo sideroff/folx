@@ -19,14 +19,17 @@ module.exports = {
         if (utils.sha256(params.password, user.salt) !== user.passwordHash) {
           return reject(messages.invalidCredentials)
         }
-        let userData = { username: user.username, email: user.email }
+        delete user.salt
+        delete user.passwordHash
+        
         let token = uuid()
-        cache.setSession(token, userData).then(() => {
+        user.token = token
+        cache.setSession(token, user).then(() => {
           let expireDate = new Date(Date.now() + config.webServer.cookieLifetimeInMs).toUTCString()
 
           res.setHeader("Set-Cookie", `token=${token}; Expires=${expireDate}; HttpOnly`)
 
-          resolve(Object.assign(userData, { token, expiresOn: expireDate }))
+          resolve(user)
         }).catch(error => {
           logger.log(`An error occured while saving a user session: ${JSON.stringify(error)}`)
           return reject(messages.serverError)

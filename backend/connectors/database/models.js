@@ -1,3 +1,5 @@
+const config = require("./../../../config")
+
 module.exports = {
   User: {
     methods: {},
@@ -19,7 +21,11 @@ module.exports = {
         default: Date.now
       },
       passwordHash: String,
-      salt: String
+      salt: String,
+      role: {
+        type: Number,
+        default: config.webServer.accessRights.user
+      }
     }
   },
   Ad: {

@@ -14,9 +14,9 @@ module.exports = {
         return reject(messages.invalidServiceRequest)
       }
 
-      let requiredAccessRight = providers[serviceRequest.provider].accessRights[serviceRequest.service]
+      let requiredAccessRightRole = providers[serviceRequest.provider].accessRights[serviceRequest.service]
 
-      if (requiredAccessRight !== accessRights.guest || serviceRequest.session.accessRight < requiredAccessRight) {
+      if (requiredAccessRightRole !== accessRights.guest || serviceRequest.session.role < requiredAccessRightRole) {
         return reject(Object.assign({ requiredAccessRight }, messages.serviceAccessDenied))
       }
 
