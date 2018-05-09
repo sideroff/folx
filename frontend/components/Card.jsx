@@ -19,7 +19,7 @@ export default class Card extends React.Component {
           </div>
         </div>}
         {!this.props.isCardLoading && <div>
-          <img src="https://picsum.photos/9/5/?random" alt="card-image" />
+          <img src="https://picsum.photos/500/300/?random" alt="card-image" />
           <div className="card-main-info">
             <div className="card-price"><strong>${this.props.values.price}</strong></div>
             <div className="card-title">

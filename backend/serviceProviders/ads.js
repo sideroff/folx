@@ -3,9 +3,14 @@ const db = require("./../connectors/database")
 const logger = require("./../logger")
 const config = require("./../../config")
 const adSchema = require("./../connectors/database/models").Ad.schema
-
+const accessRights = config.webServer.accessRights
 
 module.exports = {
+  accessRights: {
+    create: accessRights.user,
+    getById: accessRights.guest,
+    get: accessRights.guest,
+  },
   create: (params, res) => {
     return new Promise((resolve, reject) => {
 

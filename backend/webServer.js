@@ -13,11 +13,29 @@ const serviceProviders = require("./serviceProviders")
 
 function handlePostRequest(req, res) {
   return new Promise((resolve, reject) => {
-    let body = ""
+    let token = ""
+    let headers = req.rawHeaders
+    for (let i = 0; i < headers.length; i++) {
+      if (headers[i].toLowerCase() === "cookie" && headers[i + 1]) {
+        let parts = headers[i + 1].split("=")
+        if (parts[1]) {
+          token = parts[1]
+        }
+      }
+    }
 
+    let body = ""
     req.on("data", data => {
       body += data
     })
+
+    function executeService(serviceRequest) {
+      serviceProviders.executeService(serviceRequest, res).then(result => {
+        resolve(result)
+      }).catch(error => {
+        reject(error)
+      })
+    }
 
     req.on("end", () => {
       try {
@@ -31,13 +49,19 @@ function handlePostRequest(req, res) {
         return reject(messages.invalidServiceRequest)
       }
 
-      serviceProviders.executeService(serviceRequest, res).then(result => {
-        resolve(result)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+      if (!token) {
+        serviceRequest.session = {}
+        executeService(serviceRequest)
+      } else {
+        cache.getSession(token).then(session => {
+          serviceRequest.session = session || {}
+          executeService(serviceRequest)  
+        }).catch(error => {
+          reject(messages.cacheExeption)
+        })
+      }
 
+    })
   })
 }
 
@@ -104,6 +128,8 @@ function handleFileRequest(req, res) {
 function requestListener(req, res) {
   let handler
 
+
+
   if (req.method === "GET") {
     return handleGetRequest(req, res)
   }
@@ -112,6 +138,7 @@ function requestListener(req, res) {
   } else {
     handler = (req, res) => Promise.reject(messages.badRequest)
   }
+
 
   handler(req, res).then(data => {
     let result = utils.toStandartResult(data)

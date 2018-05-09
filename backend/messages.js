@@ -25,6 +25,10 @@ module.exports = {
     code: "databaseException",
     message: "There was a problem with the database."
   },
+  cacheException: {
+    code: "cacheException",
+    message: "There was a problem with the cache."
+  },
   duplicateUserUsername: {
     code: "duplicateUserUsername",
     message: "There is already a user with that username."
@@ -105,5 +109,9 @@ module.exports = {
   adDescriptionTooLong: {
     code: "adDescriptionTooLong",
     message: `The ad description should not be longer than ${models.Ad.schema.description.maxlength[0]} characters.`
+  },
+  serviceAccessDenied: {
+    code: "serviceAccessDenied",
+    message: "You do not have the required access right to execute this service."
   },
 }

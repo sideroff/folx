@@ -1,4 +1,6 @@
 const messages = require("./../messages")
+const accessRights = require("./../../config").webServer.accessRights
+
 
 const providers = {
   users: require("./users"),
@@ -12,8 +14,13 @@ module.exports = {
         return reject(messages.invalidServiceRequest)
       }
 
-      let handler = providers[serviceRequest.provider][serviceRequest.service]
+      let requiredAccessRight = providers[serviceRequest.provider].accessRights[serviceRequest.service]
 
+      if (requiredAccessRight !== accessRights.guest || serviceRequest.session.accessRight < requiredAccessRight) {
+        return reject(Object.assign({ requiredAccessRight }, messages.serviceAccessDenied))
+      }
+
+      let handler = providers[serviceRequest.provider][serviceRequest.service]
       handler(serviceRequest.params, res).then(result => {
         resolve(result)
       }).catch(error => {

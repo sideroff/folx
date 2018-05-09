@@ -6,8 +6,13 @@ const db = require("./../connectors/database")
 const cache = require("./../connectors/cache")
 const logger = require("./../logger")
 const userSchema = require("./../connectors/database/models").User.schema
+const accessRights = config.webServer.accessRights
 
 module.exports = {
+  accessRights: {
+    login: accessRights.guest,
+    register: accessRights.guest,
+  },
   login: (params, res) => {
     return new Promise((resolve, reject) => {
       db.models.User.findOne({ username: params.username }).then(user => {
