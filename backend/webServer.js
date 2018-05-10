@@ -13,14 +13,14 @@ const serviceProviders = require("./serviceProviders")
 function handlePostRequest(req, res) {
   return new Promise((resolve, reject) => {
     let token = ""
-    
+
     let headers = req.rawHeaders
     for (let i = 0; i < headers.length; i++) {
       if (headers[i].toLowerCase() === "cookie" && headers[i + 1]) {
-        let parts = headers[i+1].split(";")
-        for(let j = 0; j < parts.length; j++) {
-          if(!parts[j].startsWith("token")) continue;
-          
+        let parts = headers[i + 1].split(";")
+        for (let j = 0; j < parts.length; j++) {
+          if (!parts[j].startsWith("token")) continue;
+
           let tokenParts = parts[j].split("=")
           if (parts[1]) {
             token = parts[1].trim()
@@ -60,7 +60,7 @@ function handlePostRequest(req, res) {
       } else {
         cache.getSession(token).then(session => {
           serviceRequest.session = session || {}
-          executeService(serviceRequest)  
+          executeService(serviceRequest)
         }).catch(error => {
           reject(messages.cacheExeption)
         })
@@ -119,7 +119,7 @@ function handleFileRequest(req, res) {
 
     fs.stat(filePath, (error, stats) => {
       if (error) {
-        return reject(Object.assign({httpCode: 404}, messages.invalidFile))
+        return reject(Object.assign({ httpCode: 404 }, messages.invalidFile))
       }
 
       let buffer = fs.createReadStream(filePath)

@@ -12,7 +12,8 @@ const db = require("./../../backend/connectors/database")
 const defaultRegisterServiceRequest = {
   provider: "users",
   service: "register",
-  params: {}
+  params: {},
+  session: {}
 }
 
 const defaultTestUserData = {

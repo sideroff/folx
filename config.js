@@ -18,7 +18,7 @@ module.exports = {
       ".woff2": "application/font-woff2"
     },
     passwordSaltLength: 64,
-    cookieLifetimeInMs: 100000,
+    cookieLifetimeInMs: 20000,
     accessRights: {
       guest: 0,
       user: 1,
