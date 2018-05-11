@@ -1,6 +1,7 @@
 import actionTypes from './../actionTypes'
 import { messages as messagesConfig } from './../config'
 
+const otherProperties = ['general']
 
 function getDefaultState() {
   let state = {}
@@ -11,6 +12,10 @@ function getDefaultState() {
 
   messagesConfig.forEach(mc => {
     state[mc] = Object.assign({}, defaultState)
+  })
+
+  otherProperties.forEach(op => {
+    state[op] = []
   })
 
   return state
@@ -32,17 +37,24 @@ export default (state = defaultState, action) => {
       messageIndex = payload.messageIndex
       messageType = payload.messageType
 
-      dif[messageIndex] = Object.assign({}, state[messageIndex])
-      dif[messageIndex][messageType] = message
-
+      if (messageIndex == 'general') {
+        dif.general = [...state.general, message]
+      } else {
+        dif[messageIndex] = Object.assign({}, state[messageIndex])
+        dif[messageIndex][messageType] = message
+      } 
+      
       return Object.assign({}, state, dif)
     case actionTypes.DISMISS_MESSAGE:
       messageIndex = payload.messageIndex
       messageType = payload.messageType
-
-      dif[messageIndex] = Object.assign({}, state[messageIndex])
-      dif[messageIndex][messageType] = Object.assign({}, state[messageIndex][messageType], { isDissmissed: true })
-
+      if(messageIndex == 'general') {
+        dif.general = state.general.splice(1)
+      } else {
+        dif[messageIndex] = Object.assign({}, state[messageIndex])
+        dif[messageIndex][messageType] = Object.assign({}, state[messageIndex][messageType], { isDissmissed: true })
+      }
+      
       return Object.assign({}, state, dif)
     default:
       return state

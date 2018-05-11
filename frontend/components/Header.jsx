@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 import actionTypes from './../actionTypes'
+import Popup from './Popup.jsx'
 
 function mapStateToProps(state) {
   return {
@@ -44,30 +45,33 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header>
-        <div className="header-top-bar"></div>
-        <div className={"header-main" + (this.props.isMobileMenuActive ? " active" : "")}>
-          <div className="header-mobile-hamburger" onClick={this.onHamburgerClick}><span>☰</span></div>
-          <div className="header-logo">
-            <Link to='/'>
-              <img className="full-size" src="/logo.png" alt="logo" />
-              <img className="mobile" src="/mobile-logo.png" alt="mobile.logo" />
-            </Link>
-          </div>
-          <nav className="header-nav">
-            <div onClick={this.closeMobileMenu}>
-              <Link to='/profile'>Profile</Link>
-              <Link to='/ad-create'>New Ad</Link>
-              <Link to='/about'>About</Link>
+      <div>
+        <header>
+          <div className="header-top-bar"></div>
+          <div className={"header-main" + (this.props.isMobileMenuActive ? " active" : "")}>
+            <div className="header-mobile-hamburger" onClick={this.onHamburgerClick}><span>☰</span></div>
+            <div className="header-logo">
+              <Link to='/'>
+                <img className="full-size" src="/logo.png" alt="logo" />
+                <img className="mobile" src="/mobile-logo.png" alt="mobile.logo" />
+              </Link>
             </div>
-          </nav>
-          <div className="greeting">
-            <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
-            {this.props.currentUser.isLoggedIn ? <span className='logout' onClick={this.logout}> Logout!</span> : ''}
+            <nav className="header-nav">
+              <div onClick={this.closeMobileMenu}>
+                <Link to='/profile'>Profile</Link>
+                <Link to='/ad-create'>New Ad</Link>
+                <Link to='/about'>About</Link>
+              </div>
+            </nav>
+            <div className="greeting">
+              <span>Hello, {this.props.currentUser.isLoggedIn ? this.props.currentUser.username : 'guest'}!</span>
+              {this.props.currentUser.isLoggedIn ? <span className='logout' onClick={this.logout}> Logout!</span> : ''}
+            </div>
+            <div onClick={this.closeMobileMenu} className="header-overlay"></div>
           </div>
-          <div onClick={this.closeMobileMenu} className="header-overlay"></div>
-        </div>
-      </header>
+        </header>
+        <Popup />
+      </div>
     )
   }
 }
