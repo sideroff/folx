@@ -18,6 +18,8 @@ function getDefaultState() {
     state[op] = []
   })
 
+
+
   return state
 }
 
@@ -38,23 +40,27 @@ export default (state = defaultState, action) => {
       messageType = payload.messageType
 
       if (messageIndex == 'general') {
-        dif.general = [...state.general, message]
+        dif.general = [...state.general, payload]
       } else {
         dif[messageIndex] = Object.assign({}, state[messageIndex])
         dif[messageIndex][messageType] = message
-      } 
-      
+      }
+
       return Object.assign({}, state, dif)
     case actionTypes.DISMISS_MESSAGE:
       messageIndex = payload.messageIndex
       messageType = payload.messageType
-      if(messageIndex == 'general') {
+
+      if (messageIndex == 'general') {
+        if (state.general[0] && state.general[0].messageType === 'personalInformationWarning') {
+          localStorage.setItem('didAcknowledgePersonalInformationWarning', 'true')
+        }
         dif.general = state.general.splice(1)
       } else {
         dif[messageIndex] = Object.assign({}, state[messageIndex])
         dif[messageIndex][messageType] = Object.assign({}, state[messageIndex][messageType], { isDissmissed: true })
       }
-      
+
       return Object.assign({}, state, dif)
     default:
       return state

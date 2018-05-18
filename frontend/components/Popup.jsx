@@ -14,7 +14,9 @@ class Popup extends React.Component {
   }
 
   render() {
-    return <div>{JSON.stringify(this.props.popupMessages)}</div>
+    return (<div className="popup">
+      {this.props.popupMessages.map((pm, i) => <div key={i}>heyy</div>)}
+    </div>)
   }
 }
 

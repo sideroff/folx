@@ -124,7 +124,23 @@ main {
   }
 }
 
+.popup {
+  position: fixed;
+  width: 100%;
 
+  div {
+    opacity: 0.87;
+    background: $secondary-color-light;
+    color: $dark-background-font-color;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid $secondary-color-dark;
+    border-radius: $primary-border-radius;
+    -webkit-box-shadow: $primary-shadow;
+    -moz-box-shadow: $primary-shadow;
+    box-shadow: $primary-shadow;
+  }
+}
 
 form {
   padding: 1em;
